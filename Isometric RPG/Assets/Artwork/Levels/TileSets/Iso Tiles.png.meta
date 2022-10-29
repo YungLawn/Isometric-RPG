@@ -1,0 +1,1054 @@
+fileFormatVersion: 2
+guid: 32364c1cf58b11640951ff727e5872c3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Iso Tiles_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 448
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02ba97f17be2a5d4f9f0ae2abf42ada5
+      internalID: -910734753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 416
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac481e7337a9a644879a74b48d722a5
+      internalID: -409031650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7216a5d38f73d274f89505100087a308
+      internalID: -1933863800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 6, y: -11}
+        - {x: 2, y: -9}
+        - {x: -2, y: -9}
+        - {x: -6, y: -11}
+        - {x: -10, y: -11}
+        - {x: -16, y: -8}
+        - {x: -16, y: 8}
+        - {x: -2, y: 15}
+        - {x: 2, y: 15}
+        - {x: 16, y: 8}
+        - {x: 16, y: -8}
+        - {x: 10, y: -11}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d1a6d47adadb274cb2b06be485f48e4
+      internalID: 774581503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: -15}
+        - {x: -2, y: -15}
+        - {x: -16, y: -8}
+        - {x: -16, y: 8}
+        - {x: -10, y: 11}
+        - {x: -6, y: 11}
+        - {x: -2, y: 9}
+        - {x: 2, y: 9}
+        - {x: 6, y: 11}
+        - {x: 10, y: 11}
+        - {x: 16, y: 8}
+        - {x: 16, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bbd255e31337f94c88192a6db2ca9c2
+      internalID: -1894286148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: -15}
+        - {x: -2, y: -15}
+        - {x: -8, y: -12}
+        - {x: -8, y: 12}
+        - {x: -2, y: 15}
+        - {x: 2, y: 15}
+        - {x: 16, y: 8}
+        - {x: 16, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06cabec6b863f144097577b9ff5a17e6
+      internalID: 654630156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: -15}
+        - {x: -2, y: -15}
+        - {x: -16, y: -8}
+        - {x: -16, y: 8}
+        - {x: -2, y: 15}
+        - {x: 2, y: 15}
+        - {x: 8, y: 12}
+        - {x: 8, y: -12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19c1b80e0953fa64d866b19167efd22a
+      internalID: -143626782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6, y: -11}
+        - {x: -10, y: -11}
+        - {x: -16, y: -8}
+        - {x: -16, y: 8}
+        - {x: -2, y: 15}
+        - {x: 2, y: 15}
+        - {x: 8, y: 12}
+        - {x: 8, y: -4}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ab20dbf775359249828a42a6b068c67
+      internalID: 1857899175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_9
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: -15}
+        - {x: -2, y: -15}
+        - {x: -8, y: -12}
+        - {x: -8, y: 4}
+        - {x: 6, y: 11}
+        - {x: 10, y: 11}
+        - {x: 16, y: 8}
+        - {x: 16, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30f4d4a536cf4a74ab7a5d966a1ce5a4
+      internalID: 183135312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_10
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 10, y: -11}
+        - {x: 6, y: -11}
+        - {x: -8, y: -4}
+        - {x: -8, y: 12}
+        - {x: -2, y: 15}
+        - {x: 2, y: 15}
+        - {x: 16, y: 8}
+        - {x: 16, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 275c2deb6914b174db7f92638c3144c5
+      internalID: -1672225643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -2, y: -15}
+        - {x: -16, y: -8}
+        - {x: -16, y: 8}
+        - {x: -10, y: 11}
+        - {x: -6, y: 11}
+        - {x: 8, y: 4}
+        - {x: 8, y: -12}
+        - {x: 2, y: -15}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6240f29d770a80e47937fcdaeb26cfb4
+      internalID: 761820948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e03cb573445bf9841bab10a6427b99ec
+      internalID: 1526567963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 029d652d3f5eba24689e4db6ab15f50c
+      internalID: 246005831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d045b5c7cbfb90c49b5bb6bc8c2d2757
+      internalID: -202506944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_15
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b4fd8451e811c46b706722a50a0259
+      internalID: -890304440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74e78d4bdc70b342b8b8f2b9fa9bea1
+      internalID: -154722346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_17
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e838f65f85fe7d458533b907f5457ab
+      internalID: 1167827972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_18
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d1b3606446c6e418345619f51e0fb1
+      internalID: 403046772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_19
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 16, y: -8}
+        - {x: 10, y: -11}
+        - {x: 6, y: -11}
+        - {x: 2, y: -9}
+        - {x: -2, y: -9}
+        - {x: -6, y: -11}
+        - {x: -10, y: -11}
+        - {x: -16, y: -8}
+        - {x: -16, y: 8}
+        - {x: -2, y: 15}
+        - {x: 2, y: 15}
+        - {x: 16, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 308b7429d8fe92946ab5f3549192ddf7
+      internalID: -1310074195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2, y: -31}
+        - {x: -2, y: -31}
+        - {x: -16, y: -24}
+        - {x: -16, y: 24}
+        - {x: -2, y: 31}
+        - {x: 2, y: 31}
+        - {x: 16, y: 24}
+        - {x: 16, y: -24}
+      physicsShape:
+      - - {x: 1, y: -32}
+        - {x: -1, y: -32}
+        - {x: -16, y: -25}
+        - {x: -16, y: -24}
+        - {x: 16, y: -24}
+        - {x: 16, y: -25}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b07d0aa19dce28f4a84ab43fbfe092f8
+      internalID: -173851713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 6, y: -28}
+        - {x: 2, y: -25}
+        - {x: -2, y: -25}
+        - {x: -6, y: -28}
+        - {x: -10, y: -28}
+        - {x: -16, y: -24}
+        - {x: 16, y: -24}
+        - {x: 10, y: -28}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a162d33a6a9e8345972c4f5d11ad7cb
+      internalID: 1013324380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -2, y: -32}
+        - {x: -16, y: -24}
+        - {x: 16, y: -24}
+        - {x: 2, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d3ba3a7897e60f49a171b54043bda29
+      internalID: 611969574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -2, y: -32}
+        - {x: -8, y: -28}
+        - {x: -8, y: -20}
+        - {x: -2, y: -16}
+        - {x: 2, y: -16}
+        - {x: 16, y: -24}
+        - {x: 2, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9946219709706d428a872c47f23bbc8
+      internalID: 235837376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -2, y: -16}
+        - {x: 2, y: -16}
+        - {x: 8, y: -20}
+        - {x: 8, y: -28}
+        - {x: 2, y: -32}
+        - {x: -2, y: -32}
+        - {x: -16, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50db8d257934be44882ee44040beda18
+      internalID: 662538970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6, y: -28}
+        - {x: -10, y: -28}
+        - {x: -16, y: -24}
+        - {x: 8, y: -20}
+      tessellationDetail: 0
+      bones: []
+      spriteID: adee31de5fc8d2d44bc88bf5379aa35f
+      internalID: -1191742800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: -32}
+        - {x: -2, y: -32}
+        - {x: -8, y: -28}
+        - {x: 16, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e0625d2bd304574ca27dcd592bb6267
+      internalID: -581627729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_27
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 6, y: -28}
+        - {x: -8, y: -20}
+        - {x: 16, y: -24}
+        - {x: 10, y: -28}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e957e888000e7504f9b07a3f205be9cd
+      internalID: -642398945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -2, y: -32}
+        - {x: -16, y: -24}
+        - {x: 8, y: -28}
+        - {x: 2, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 833f022f9bdd3464e8221ccefec3f522
+      internalID: -1214068504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_38
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 815db7a75459f424e9aa18a7ae1c4eea
+      internalID: -1990219279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_39
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21894da043e433498a951a228d41eee
+      internalID: 976890016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_40
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2886d9e8a799d7247864d5c0fba17674
+      internalID: 1161510276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_41
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e27bfefcbe949cf4680f553e69799708
+      internalID: 1155828997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 416
+        width: 32
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a779c0befa9b7d4498407e2af1eed02c
+      internalID: 1169486824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 416
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c78cd39c8d6bdc4fb76f313898b6854
+      internalID: -899016351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 416
+        width: 32
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46c8a98c8e4093a48b1edc4b47877727
+      internalID: 1895354120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 8d88ace4871af3146a54dd8eaab9d457, type: 3}
+      name: _NormalMap
+    nameFileIdTable:
+      Iso Tiles_11: 761820948
+      Iso Tiles_18: 403046772
+      Iso Tiles_16: -154722346
+      Iso Tiles_29: 1169486824
+      Iso Tiles_9: 183135312
+      Iso Tiles_31: 1895354120
+      Iso Tiles_21: 1013324380
+      Iso Tiles_23: 235837376
+      Iso Tiles_15: -890304440
+      Iso Tiles_17: 1167827972
+      Iso Tiles_27: -642398945
+      Iso Tiles_0: -910734753
+      Iso Tiles_8: 1857899175
+      Iso Tiles_28: -1214068504
+      Iso Tiles_12: 1526567963
+      Iso Tiles_19: -1310074195
+      Iso Tiles_36: -2004061256
+      Iso Tiles_2: -409031650
+      Iso Tiles_10: -1672225643
+      Iso Tiles_37: 900948769
+      Iso Tiles_1: 1780534401
+      Iso Tiles_40: 1161510276
+      Iso Tiles_7: -143626782
+      Iso Tiles_34: -28173920
+      Iso Tiles_5: -1894286148
+      Iso Tiles_33: -531417000
+      Iso Tiles_32: 1858960374
+      Iso Tiles_41: 1155828997
+      Iso Tiles_20: -173851713
+      Iso Tiles_13: 246005831
+      Iso Tiles_22: 611969574
+      Iso Tiles_38: -1990219279
+      Iso Tiles_26: -581627729
+      Iso Tiles_14: -202506944
+      Iso Tiles_35: 76852230
+      Iso Tiles_24: 662538970
+      Iso Tiles_4: 774581503
+      Iso Tiles_6: 654630156
+      Iso Tiles_25: -1191742800
+      Iso Tiles_30: -899016351
+      Iso Tiles_3: -1933863800
+      Iso Tiles_39: 976890016
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
