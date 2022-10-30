@@ -39,7 +39,7 @@ public abstract class MovementState : State
             state.direction = lastMoveDirection;
         }
 
-        Debug.Log("Frame: " + currentFrame);
+        // Debug.Log("Frame: " + currentFrame);
 
         body.velocity = state.direction * moveSpeed; //
 
@@ -61,8 +61,12 @@ public abstract class MovementState : State
 
         float normalizedTime = currentFrame / (float)(totalFrames + 1);
 
+        Debug.Log(totalFrames * idleIntervalMultiplier);
+        
         if(action == IDLE)
+        {
             anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
+        }
         else
             anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
     }

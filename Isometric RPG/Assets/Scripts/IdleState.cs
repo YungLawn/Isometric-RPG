@@ -4,12 +4,11 @@ public class IdleState : MovementState
 {
     public override void EnterState(StateManager incomingState)
     {
+        // Debug.Log("Entering Idle");
         moveSpeed = 0.0f;
-        // totalFrames = 8;
-        // totalFrames = totalFrames * (int)idleIntervalMultiplier;
+        idleIntervalMultiplier = 2;
         framerate  = 0.125f;
         action = IDLE;
-        // Debug.Log("Entering Idle");
         state = incomingState;
         body = state.body;
         anim = state.animator;

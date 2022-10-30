@@ -4,11 +4,11 @@ public class RunState : MovementState
 {
     public override void EnterState(StateManager incomingState)
     {
+        // Debug.Log("Entering Run");
         moveSpeed = 1.0f;
-        // totalFrames = 8;
+        idleIntervalMultiplier = 1;
         framerate  = 0.125f;
         action = WALK;
-        // Debug.Log("Entering Run");
         state = incomingState;
         body = state.body;
         anim = state.animator;
