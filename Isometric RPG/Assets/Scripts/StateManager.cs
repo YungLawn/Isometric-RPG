@@ -41,12 +41,12 @@ public class StateManager : MonoBehaviour
     {
         getDirectionalInput();
         isRunning();
-        currentState.UpdateState(this);
+        currentState.UpdateState();
     }
 
     void FixedUpdate()
     {
-        currentState.FixedUpdateState(this);
+        currentState.FixedUpdateState();
     }
 
     public void SwitchState(State state)

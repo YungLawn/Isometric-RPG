@@ -2,25 +2,27 @@ using UnityEngine;
 
 public class WalkState : MovementState
 {
-    public override void EnterState(StateManager state)
+    public override void EnterState(StateManager incomingState)
     {
         moveSpeed = 0.5f;
-        totalFrames = 8;
+        // totalFrames = 8;
+        framerate  = 0.125f;
+        action = WALK;
         // Debug.Log("Entering Walk");
+        state = incomingState;
         body = state.body;
         anim = state.animator;
     }
 
-    public override void UpdateState(StateManager state)
+    public override void UpdateState()
     {
         // Debug.Log("Walking");
-        move(state, state.direction);
-        // Animate(state, WALK);
+        move();
     }
 
-    public override void FixedUpdateState(StateManager state)
+    public override void FixedUpdateState()
     {
-        Animate(state, WALK);
+        Animate();
     }
 
     public override void OnCollisionEnter(StateManager state)

@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class IdleState : MovementState
 {
-    public override void EnterState(StateManager state)
+    public override void EnterState(StateManager incomingState)
     {
         moveSpeed = 0.0f;
-        totalFrames = 8;
+        // totalFrames = 8;
+        // totalFrames = totalFrames * (int)idleIntervalMultiplier;
+        framerate  = 0.125f;
+        action = IDLE;
         // Debug.Log("Entering Idle");
+        state = incomingState;
         body = state.body;
         anim = state.animator;
     }
 
-    public override void UpdateState(StateManager state)
+    public override void UpdateState()
     {
         // Debug.Log("Idling");
-        move(state, state.direction);
-        // Animate(state, IDLE);
+        move();
     }
 
-    public override void FixedUpdateState(StateManager state)
+    public override void FixedUpdateState()
     {
-        Animate(state, IDLE);
+        Animate();
     }
 
     public override void OnCollisionEnter(StateManager state)

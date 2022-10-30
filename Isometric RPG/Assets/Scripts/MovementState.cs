@@ -3,14 +3,16 @@ using UnityEngine;
 public abstract class MovementState : State
 {
     public float moveSpeed;
-    Vector2 moveDirection;
     Vector2 lastMoveDirection;
+
     public string currentAnimation;
     public int currentFrame;
-    string action;
-
+    public int totalFrames = 8;
+    public string action;
+    public float framerate;
+    public int idleIntervalMultiplier;
+    string direction;
     float timer;
-    float framerate  = 0.15f;
 
     const string BASE = "Human_";
     public const string WALK = "Walk_";
@@ -20,114 +22,87 @@ public abstract class MovementState : State
     const string SOUTH = "South";
     const string EAST = "East";
     const string WEST = "West";    
-    // public override void EnterState(StateManager state)
-    // {
-    //     Debug.Log("Entering MovementState");
-    // }
 
-    // public override void UpdateState(StateManager state)
-    // {
-    //     Debug.Log("Moving");
-    //     move(state);
-    // }
-
-    // public override void OnCollisionEnter(StateManager state)
-    // {
-
-    // }
-
-    public void move(StateManager state, Vector2 direction)
+    public void move()
     {
-        moveDirection = direction;
-
-        if(moveDirection.magnitude > 0 && !state.runToggle)
+        if(state.direction.magnitude > 0 && !state.runToggle) //Walk Condition
         {
             state.SwitchState(state.walkState);
         }
-        else if(moveDirection.magnitude > 0 && state.runToggle)
+        else if(state.direction.magnitude > 0 && state.runToggle) //Run Condition
         {
             state.SwitchState(state.runState);
         }
-        else if(moveDirection.magnitude <= 0)   
+        else if(state.direction.magnitude <= 0) //Idle Condition
         {
             state.SwitchState(state.idleState);
-            moveDirection = lastMoveDirection;
+            state.direction = lastMoveDirection;
         }
 
-        // Debug.Log("CurrentState: " + state.currentState);
-        // Debug.Log(currentAnimation);
         Debug.Log("Frame: " + currentFrame);
 
-        // if(moveDirection.magnitude == 0)
-        //     Debug.Log("lastdir: " + lastMoveDirection);
-        body.velocity = moveDirection * moveSpeed;
+        body.velocity = state.direction * moveSpeed; //
 
-        if((body.velocity.magnitude <= 0.0) && moveDirection.x != 0 || moveDirection.y != 0)
-            lastMoveDirection = moveDirection;
+        if((body.velocity.magnitude == 0))
+            lastMoveDirection = state.direction;
     }
 
-    public void Animate(StateManager state, string doing)
+    public void Animate()
     {
-        action = doing;
-        getAnimation(state);
+        getAnimation();
 
-        timer += Time.deltaTime;//time since last movement
-
-        // int Frames = (int)((playTime) * state.currentState.totalFrames);//total frame since movement began
-        // currentFrame = Frames % state.currentState.totalFrames;//current frame
-
+        timer += Time.deltaTime;
         if(timer >= framerate)
         {
+            // Debug.Log(totalFrames);
             timer -= framerate;
-            currentFrame = (currentFrame +1 ) % state.currentState.totalFrames;//current frame
+            currentFrame = (currentFrame + 1) % totalFrames;
         }
-        // Debug.Log(Frames);
-        // Debug.Log(totalFrames);
-        float normalizedTime = currentFrame / (float)(state.currentState.totalFrames + 1f);
-        // Debug.Log(normalizedTime);
-        
-        anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
+
+        float normalizedTime = currentFrame / (float)(totalFrames + 1);
+
+        if(action == IDLE)
+            anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
+        else
+            anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
     }
 
-
-
-    void getAnimation(StateManager state)
+    void getAnimation()
     {
-        string direction = SOUTH;
+        direction = SOUTH;
 
-        if(moveDirection.x == 0 && moveDirection.y > 0) //North
+        if(state.direction.x == 0 && state.direction.y > 0) //North
         {
             direction = NORTH;
         }
-        else if(moveDirection.x == 0 && moveDirection.y < 0) //South
+        else if(state.direction.x == 0 && state.direction.y < 0) //South
         {
             direction = SOUTH;
         }
-        else if(moveDirection.x > 0 && moveDirection.y == 0) //East
+        else if(state.direction.x > 0 && state.direction.y == 0) //East
         {
             direction = EAST;
         }
-        else if(moveDirection.x < 0 && moveDirection.y == 0) //West
+        else if(state.direction.x < 0 && state.direction.y == 0) //West
         {
             direction = WEST;
         }
-        else if(moveDirection.x > 0 && moveDirection.y > 0) //NorthEast
+        else if(state.direction.x > 0 && state.direction.y > 0) //NorthEast
         {
             direction = NORTH + EAST;
         }
-        else if(moveDirection.x < 0 && moveDirection.y > 0) //NorthWest
+        else if(state.direction.x < 0 && state.direction.y > 0) //NorthWest
         {
             direction = NORTH + WEST;
         }
-        else if(moveDirection.x > 0 && moveDirection.y < 0) //SouthEast
+        else if(state.direction.x > 0 && state.direction.y < 0) //SouthEast
         {
             direction = SOUTH + EAST;
         }
-        else if(moveDirection.x < 0 && moveDirection.y < 0) //SouthWest
+        else if(state.direction.x < 0 && state.direction.y < 0) //SouthWest
         {
             direction = SOUTH + WEST;
         }
-
         currentAnimation = BASE + action + direction;
     }
 }
