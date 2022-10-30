@@ -8,7 +8,9 @@ public abstract class MovementState : State
     public string currentAnimation;
     public int currentFrame;
     string action;
-    public float idleCount;
+
+    float timer;
+    float framerate  = 0.15f;
 
     const string BASE = "Human_";
     public const string WALK = "Walk_";
@@ -17,10 +19,7 @@ public abstract class MovementState : State
     const string NORTH = "North";
     const string SOUTH = "South";
     const string EAST = "East";
-    const string WEST = "West";
-
-    const float idleIntervalMult = 3;
-    
+    const string WEST = "West";    
     // public override void EnterState(StateManager state)
     // {
     //     Debug.Log("Entering MovementState");
@@ -57,8 +56,7 @@ public abstract class MovementState : State
 
         // Debug.Log("CurrentState: " + state.currentState);
         // Debug.Log(currentAnimation);
-        Debug.Log("Frame: " + currentFrame + "\nidleCnt: " + idleCount);
-        // Debug.Log(idleCount);
+        Debug.Log("Frame: " + currentFrame);
 
         // if(moveDirection.magnitude == 0)
         //     Debug.Log("lastdir: " + lastMoveDirection);
@@ -73,16 +71,25 @@ public abstract class MovementState : State
         action = doing;
         getAnimation(state);
 
-        float playTime = Time.time;//time since last movement
-        int Frames = (int)((playTime) * state.currentState.totalFrames);//total frame since movement began
+        timer += Time.deltaTime;//time since last movement
+
+        // int Frames = (int)((playTime) * state.currentState.totalFrames);//total frame since movement began
+        // currentFrame = Frames % state.currentState.totalFrames;//current frame
+
+        if(timer >= framerate)
+        {
+            timer -= framerate;
+            currentFrame = (currentFrame +1 ) % state.currentState.totalFrames;//current frame
+        }
         // Debug.Log(Frames);
-        currentFrame = Frames % state.currentState.totalFrames;//current frame
         // Debug.Log(totalFrames);
-        float normalizedTime = currentFrame / (float)(state.currentState.totalFrames) + 0.001f;
+        float normalizedTime = currentFrame / (float)(state.currentState.totalFrames + 1f);
         // Debug.Log(normalizedTime);
         
-        anim.Play(currentAnimation, 0, normalizedTime);
+        anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
     }
+
+
 
     void getAnimation(StateManager state)
     {
@@ -123,6 +130,4 @@ public abstract class MovementState : State
 
         currentAnimation = BASE + action + direction;
     }
-    
-
 }
