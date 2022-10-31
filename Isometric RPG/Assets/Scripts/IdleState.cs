@@ -10,6 +10,7 @@ public class IdleState : MovementState
         state = incomingState;
         body = state.body;
         anim = state.animator;
+        state.direction = lastMoveDirection;
     }
 
     public override void UpdateState()

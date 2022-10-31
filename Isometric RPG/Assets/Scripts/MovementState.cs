@@ -30,12 +30,10 @@ public abstract class MovementState : State
         if(state.direction.magnitude > 0 && !state.runToggle) //Walk Condition
         {
             state.SwitchState(state.walkState);
-            lastMoveDirection = state.direction;
         }
         else if(state.direction.magnitude > 0 && state.runToggle) //Run Condition
         {
             state.SwitchState(state.runState);
-            lastMoveDirection = state.direction;
         }
         else if(state.direction.magnitude <= 0) //Idle Condition
         {
@@ -77,8 +75,6 @@ public abstract class MovementState : State
 
     void getAnimation()
     {
-        direction = SOUTH;
-
         if(state.direction.x == 0 && state.direction.y > 0) //North
         {
             direction = NORTH;
