@@ -6,8 +6,6 @@ public class IdleState : MovementState
     {
         // Debug.Log("Entering Idle");
         moveSpeed = 0.0f;
-        idleIntervalMultiplier = 2;
-        framerate  = 0.125f;
         action = IDLE;
         state = incomingState;
         body = state.body;

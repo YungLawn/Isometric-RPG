@@ -6,8 +6,6 @@ public class WalkState : MovementState
     {
         // Debug.Log("Entering Walk");
         moveSpeed = 0.5f;
-        idleIntervalMultiplier = 2;
-        framerate  = 0.125f;
         action = WALK;
         state = incomingState;
         body = state.body;
