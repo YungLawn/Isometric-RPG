@@ -6,7 +6,7 @@ public class RunState : MovementState
     {
         // Debug.Log("Entering Run");
         moveSpeed = 1.0f;
-        idleIntervalMultiplier = 1;
+        idleIntervalMultiplier = 2;
         framerate  = 0.125f;
         action = WALK;
         state = incomingState;

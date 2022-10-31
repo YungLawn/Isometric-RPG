@@ -49,8 +49,6 @@ public abstract class MovementState : State
 
     public void Animate()
     {
-        getAnimation();
-
         timer += Time.deltaTime;
         if(timer >= framerate)
         {
@@ -59,16 +57,14 @@ public abstract class MovementState : State
             currentFrame = (currentFrame + 1) % totalFrames;
         }
 
-        float normalizedTime = currentFrame / (float)(totalFrames + 1);
+        float normalizedTime = currentFrame / (float)(totalFrames + idleIntervalMultiplier) * idleIntervalMultiplier;
 
-        Debug.Log(totalFrames * idleIntervalMultiplier);
-        
-        if(action == IDLE)
-        {
-            anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
-        }
-        else
-            anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
+        // Debug.Log(totalFrames * idleIntervalMultiplier);
+
+        getAnimation();
+
+        anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
+        // anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
     }
 
     void getAnimation()
@@ -107,6 +103,9 @@ public abstract class MovementState : State
         {
             direction = SOUTH + WEST;
         }
+
+
+
         currentAnimation = BASE + action + direction;
     }
 }
