@@ -5,7 +5,7 @@ public class WalkState : MovementState
     public override void EnterState(StateManager incomingState)
     {
         // Debug.Log("Entering Walk");
-        moveSpeed = 0.5f;
+        moveSpeed = 0.01f;
         action = WALK;
         state = incomingState;
         body = state.body;

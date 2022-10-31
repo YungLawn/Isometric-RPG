@@ -3,11 +3,11 @@ using UnityEngine;
 public abstract class MovementState : State
 {
     public float moveSpeed;
-    Vector2 lastMoveDirection;
+    public Vector2 lastMoveDirection;
 
     float framerate = 0.125f;
     int totalFrames = 8;
-    int idleIntervalMultiplier = 3;
+    int idleIntervalMultiplier = 1;
     int currentFrame;
     int idleCycleFrame;
     float timer;
@@ -15,7 +15,7 @@ public abstract class MovementState : State
     string currentAnimation;
     public string action;
     string direction;
-    
+
     const string BASE = "Human_";
     public const string WALK = "Walk_";
     public const string IDLE =  "Idle_";
@@ -30,23 +30,23 @@ public abstract class MovementState : State
         if(state.direction.magnitude > 0 && !state.runToggle) //Walk Condition
         {
             state.SwitchState(state.walkState);
+            lastMoveDirection = state.direction;
         }
         else if(state.direction.magnitude > 0 && state.runToggle) //Run Condition
         {
             state.SwitchState(state.runState);
+            lastMoveDirection = state.direction;
         }
         else if(state.direction.magnitude <= 0) //Idle Condition
         {
             state.SwitchState(state.idleState);
-            state.direction = lastMoveDirection;
         }
 
         // Debug.Log("Frame: " + currentFrame);
+        // Debug.Log(idleIntervalMultiplier);
+        Debug.Log(lastMoveDirection);
 
         body.velocity = state.direction * moveSpeed; 
-
-        if((body.velocity.magnitude == 0))
-            lastMoveDirection = state.direction;
     }
 
     public void Animate()
@@ -63,8 +63,13 @@ public abstract class MovementState : State
 
         getAnimation(); //determine current movement
 
+        if(idleCycleFrame == 0)
+        {
+            idleIntervalMultiplier = Random.Range(2,7);
+        }
+
         //play idle anim every X animation cycles, if idling
-        if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - 8) && action == IDLE)
+        if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && action == IDLE)
             anim.PlayInFixedTime(currentAnimation, 0, 0);
         else
             anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
