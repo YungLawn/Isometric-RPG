@@ -47,7 +47,7 @@ public abstract class MovementState : State
 
         // Debug.Log("Frame: " + currentFrame);
         // Debug.Log(idleIntervalMultiplier);
-        Debug.Log(lastMoveDirection);
+        // Debug.Log(lastMoveDirection);
 
         body.velocity = moveDirection * moveSpeed; 
     }
