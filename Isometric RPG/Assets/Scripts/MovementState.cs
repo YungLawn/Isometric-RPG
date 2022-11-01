@@ -4,6 +4,7 @@ public abstract class MovementState : State
 {
     public float moveSpeed;
     public Vector2 lastMoveDirection;
+    public Vector2 moveDirection;
 
     float framerate = 0.125f;
     int totalFrames = 8;
@@ -14,7 +15,6 @@ public abstract class MovementState : State
 
     string currentAnimation;
     public string action;
-    string direction;
 
     const string BASE = "Human_";
     public const string WALK = "Walk_";
@@ -27,28 +27,39 @@ public abstract class MovementState : State
 
     public void move()
     {
-        if(state.direction.magnitude > 0 && !state.runToggle) //Walk Condition
-        {
-            state.SwitchState(state.walkState);
-        }
-        else if(state.direction.magnitude > 0 && state.runToggle) //Run Condition
-        {
-            state.SwitchState(state.runState);
-        }
-        else if(state.direction.magnitude <= 0) //Idle Condition
+        moveDirection = state.direction;
+
+        if(moveDirection.magnitude == 0) //Idle Condition
         {
             state.SwitchState(state.idleState);
         }
+        else if(moveDirection.magnitude > 0 && state.runToggle) //Run Condition
+        {
+            state.SwitchState(state.runState);
+        }
+        if(moveDirection.magnitude > 0 && !state.runToggle) //Walk Condition
+        {
+            state.SwitchState(state.walkState);
+        }
+
+        if(state.direction.magnitude != 0)
+            lastMoveDirection = state.direction;
 
         // Debug.Log("Frame: " + currentFrame);
         // Debug.Log(idleIntervalMultiplier);
         Debug.Log(lastMoveDirection);
 
-        body.velocity = state.direction * moveSpeed; 
+        body.velocity = moveDirection * moveSpeed; 
     }
 
     public void Animate()
     {
+
+        if(action == IDLE)
+            currentAnimation = BASE + action + translateDirection(lastMoveDirection);
+        else
+            currentAnimation = BASE + action + translateDirection(moveDirection);
+
         timer += Time.deltaTime;
         if(timer >= framerate)
         {
@@ -57,57 +68,64 @@ public abstract class MovementState : State
             idleCycleFrame = (idleCycleFrame + 1) % (totalFrames * idleIntervalMultiplier); // cycling through idle interval
         }
 
-        float normalizedTime = currentFrame / (float)(totalFrames + 1f);//calculate percentage of animation based on current frame
-
-        getAnimation(); //determine current movement
-
         if(idleCycleFrame == 0)
         {
-            idleIntervalMultiplier = Random.Range(2,7);
+            idleIntervalMultiplier = Random.Range(3,7);
         }
 
-        //play idle anim every X animation cycles, if idling
+        float normalizedTime = currentFrame / (float)(totalFrames + 1f);//calculate percentage of animation based on current frame
+
+        //if idling, restrict animation for X cycles
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && action == IDLE)
             anim.PlayInFixedTime(currentAnimation, 0, 0);
-        else
+        else    //play animation as normal
             anim.PlayInFixedTime(currentAnimation, 0, normalizedTime);
     }
 
-    void getAnimation()
+    string translateDirection(Vector2 incoming)
     {
-        if(state.direction.x == 0 && state.direction.y > 0) //North
-        {
-            direction = NORTH;
-        }
-        else if(state.direction.x == 0 && state.direction.y < 0) //South
-        {
-            direction = SOUTH;
-        }
-        else if(state.direction.x > 0 && state.direction.y == 0) //East
-        {
-            direction = EAST;
-        }
-        else if(state.direction.x < 0 && state.direction.y == 0) //West
-        {
-            direction = WEST;
-        }
-        else if(state.direction.x > 0 && state.direction.y > 0) //NorthEast
-        {
-            direction = NORTH + EAST;
-        }
-        else if(state.direction.x < 0 && state.direction.y > 0) //NorthWest
-        {
-            direction = NORTH + WEST;
-        }
-        else if(state.direction.x > 0 && state.direction.y < 0) //SouthEast
-        {
-            direction = SOUTH + EAST;
-        }
-        else if(state.direction.x < 0 && state.direction.y < 0) //SouthWest
-        {
-            direction = SOUTH + WEST;
-        }
+        string output = SOUTH;
 
-        currentAnimation = BASE + action + direction;
+        if(incoming.x == 0 && incoming.y > 0) //North
+        {
+            output = NORTH;
+        }
+        else if(incoming.x == 0 && incoming.y < 0) //South
+        {
+            output = SOUTH;
+        }
+        else if(incoming.x > 0 && incoming.y == 0) //East
+        {
+            output = EAST;
+        }
+        else if(incoming.x < 0 && incoming.y == 0) //West
+        {
+            output = WEST;
+        }
+        else if(incoming.x > 0 && incoming.y > 0) //NorthEast
+        {
+            output = NORTH + EAST;
+        }
+        else if(incoming.x < 0 && incoming.y > 0) //NorthWest
+        {
+            output = NORTH + WEST;
+        }
+        else if(incoming.x > 0 && incoming.y < 0) //SouthEast
+        {
+            output = SOUTH + EAST;
+        }
+        else if(incoming.x < 0 && incoming.y < 0) //SouthWest
+        {
+            output = SOUTH + WEST;
+        }
+        // else 
+        //     output = SOUTH;
+
+        return output;
     }
+
+    // void getAnimation()
+    // {
+    //     currentAnimation = BASE + action + translateDirection(state.direction);
+    // }
 }

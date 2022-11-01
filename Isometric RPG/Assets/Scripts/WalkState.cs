@@ -10,8 +10,6 @@ public class WalkState : MovementState
         state = incomingState;
         body = state.body;
         anim = state.animator;
-        lastMoveDirection = state.direction;
-
     }
 
     public override void UpdateState()
