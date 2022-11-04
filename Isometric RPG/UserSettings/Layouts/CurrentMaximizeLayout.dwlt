@@ -224,7 +224,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: e6670000
+      m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 18f8ffff0cfbffff82680000
       m_RenameOverlay:
@@ -777,8 +777,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: e6670000
-    m_LastClickedInstanceID: 26598
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000fc6800006c68000086710000
     m_RenameOverlay:
