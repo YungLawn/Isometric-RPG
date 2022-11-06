@@ -804,7 +804,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.125}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -830,7 +830,7 @@ TextureImporter:
       name: _NormalMap
     nameFileIdTable:
       Iso Tiles_11: 761820948
-      Iso Tiles_18: 403046772
+      Iso Tiles_39: 976890016
       Iso Tiles_16: -154722346
       Iso Tiles_29: 1169486824
       Iso Tiles_9: 183135312
@@ -870,7 +870,7 @@ TextureImporter:
       Iso Tiles_25: -1191742800
       Iso Tiles_30: -899016351
       Iso Tiles_3: -1933863800
-      Iso Tiles_39: 976890016
+      Iso Tiles_18: 403046772
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
