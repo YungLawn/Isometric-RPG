@@ -6,7 +6,7 @@ public abstract class MovementState : State
     public Vector2 lastMoveDirection;
     public Vector2 moveDirection;
 
-    float framerate = 0.125f;
+    public float framerate = 0.125f;
     int totalFrames = 8;
     int idleIntervalMultiplier = 1;
     int currentFrame;
