@@ -728,6 +728,34 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Iso Tiles Collisions_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 144
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 4, y: 4}
+        - {x: -3, y: 4}
+        - {x: -3, y: 7}
+        - {x: -1, y: 8}
+        - {x: 7, y: 8}
+        - {x: 8, y: 7}
+        - {x: 8, y: 5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 508762b3548d548499b0d638932655a8
+      internalID: 646685680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -751,6 +779,7 @@ TextureImporter:
       Iso Tiles Collisions_17: 1160343707
       Iso Tiles Collisions_12: -1011067405
       Iso Tiles Collisions_13: 565740621
+      Iso Tiles Collisions_23: 646685680
       Iso Tiles Collisions_11: -56956599
       Iso Tiles Collisions_4: -1267157696
       Iso Tiles Collisions_19: -739019204
