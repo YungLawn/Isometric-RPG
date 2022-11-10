@@ -108,23 +108,23 @@ TextureImporter:
       name: Iso Tiles Collisions_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 416
+        x: 162
+        y: 160
         width: 32
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.51, y: 0.18}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 2, y: -16}
-        - {x: -2, y: -16}
-        - {x: -16, y: -9}
-        - {x: -16, y: 1}
-        - {x: -2, y: 8}
-        - {x: 2, y: 8}
-        - {x: 16, y: 1}
-        - {x: 16, y: -9}
+      - - {x: -5, y: -10}
+        - {x: -4, y: -9}
+        - {x: -2, y: -8}
+        - {x: 4, y: -8}
+        - {x: 6, y: -9}
+        - {x: 6, y: -11}
+        - {x: 2, y: -12}
+        - {x: -5, y: -12}
       tessellationDetail: 0
       bones: []
       spriteID: 9f2511365210f6848b584f9c91b932ad
@@ -137,15 +137,21 @@ TextureImporter:
       name: Iso Tiles Collisions_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
+        x: 32
+        y: 416
         width: 32
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 0, y: -16}
+        - {x: -16, y: -9}
+        - {x: -16, y: -1}
+        - {x: 0, y: 7}
+        - {x: 16, y: -1}
+        - {x: 16, y: -9}
       tessellationDetail: 0
       bones: []
       spriteID: 142a9edd27d39c0429fd6ef551299c11
@@ -165,30 +171,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Iso Tiles Collisions_21: -180882291
-      Iso Tiles Collisions_10: 1066065422
-      Iso Tiles Collisions_7: 439596977
-      Iso Tiles Collisions_20: -906633222
-      Iso Tiles Collisions_16: 1330537771
-      Iso Tiles Collisions_22: 1444679796
       Iso Tiles Collisions_1: -615672439
       Iso Tiles Collisions_0: 1400779840
-      Iso Tiles Collisions_14: -1191678948
-      Iso Tiles Collisions_17: 1160343707
-      Iso Tiles Collisions_12: -1011067405
-      Iso Tiles Collisions_13: 565740621
-      Iso Tiles Collisions_23: 646685680
-      Iso Tiles Collisions_11: -56956599
-      Iso Tiles Collisions_4: -1267157696
-      Iso Tiles Collisions_19: -739019204
-      Iso Tiles Collisions_3: 1472413205
-      Iso Tiles Collisions_6: -1114350177
-      Iso Tiles Collisions_15: 480004492
-      Iso Tiles Collisions_9: -383720467
-      Iso Tiles Collisions_8: -1629795014
-      Iso Tiles Collisions_2: -930431276
-      Iso Tiles Collisions_18: 1887668803
-      Iso Tiles Collisions_5: 1853217920
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
