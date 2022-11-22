@@ -117,14 +117,17 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -5, y: -10}
-        - {x: -4, y: -9}
-        - {x: -2, y: -8}
-        - {x: 4, y: -8}
-        - {x: 6, y: -9}
-        - {x: 6, y: -11}
-        - {x: 2, y: -12}
-        - {x: -5, y: -12}
+      - - {x: -6, y: -12}
+        - {x: -6, y: -9}
+        - {x: -5, y: -8}
+        - {x: -3, y: -7}
+        - {x: 3, y: -7}
+        - {x: 6, y: -8}
+        - {x: 7, y: -9}
+        - {x: 7, y: -11}
+        - {x: 6, y: -12}
+        - {x: 2, y: -13}
+        - {x: -5, y: -13}
       tessellationDetail: 0
       bones: []
       spriteID: 9f2511365210f6848b584f9c91b932ad
@@ -147,15 +150,140 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: 0, y: -16}
-        - {x: -16, y: -9}
-        - {x: -16, y: -1}
-        - {x: 0, y: 7}
-        - {x: 16, y: -1}
-        - {x: 16, y: -9}
+        - {x: -16, y: -8}
+        - {x: -16, y: -6}
+        - {x: 0, y: 2}
+        - {x: 16, y: -6}
+        - {x: 16, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 142a9edd27d39c0429fd6ef551299c11
       internalID: 1400779840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles Collisions_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 416
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16, y: -8}
+        - {x: 0, y: 0}
+        - {x: 16, y: -8}
+        - {x: 0, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b33e694e5ff7a7542b18b3c671bd75b6
+      internalID: 299621863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles Collisions_3
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 416
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16, y: 6}
+        - {x: -16, y: 9}
+        - {x: 16, y: 9}
+        - {x: 16, y: 6}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0443e7565dece6643b5a64690b8d3e88
+      internalID: 1987819658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles Collisions_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: 0}
+        - {x: 0, y: 16}
+        - {x: 3, y: 16}
+        - {x: 3, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f15752035c4a16448b78c0058417d52
+      internalID: -280719032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles Collisions_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -3, y: 0}
+        - {x: -3, y: 16}
+        - {x: 0, y: 16}
+        - {x: 0, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a79e46062ea384448d7a06905b68e58
+      internalID: 1446521411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles Collisions_6
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 352
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16, y: 7}
+        - {x: -16, y: 10}
+        - {x: 16, y: 10}
+        - {x: 16, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d30537efb4e5a840a954e67eef2ab28
+      internalID: 2103252688
       vertices: []
       indices: 
       edges: []
@@ -173,6 +301,11 @@ TextureImporter:
     nameFileIdTable:
       Iso Tiles Collisions_1: -615672439
       Iso Tiles Collisions_0: 1400779840
+      Iso Tiles Collisions_4: -280719032
+      Iso Tiles Collisions_3: 1987819658
+      Iso Tiles Collisions_6: 2103252688
+      Iso Tiles Collisions_2: 299621863
+      Iso Tiles Collisions_5: 1446521411
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
