@@ -201,10 +201,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 6}
-        - {x: -16, y: 9}
-        - {x: 16, y: 9}
-        - {x: 16, y: 6}
+      - - {x: -16, y: -3}
+        - {x: -16, y: 0}
+        - {x: 16, y: 0}
+        - {x: 16, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: 0443e7565dece6643b5a64690b8d3e88
@@ -226,10 +226,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: 0}
-        - {x: 0, y: 16}
-        - {x: 3, y: 16}
-        - {x: 3, y: 0}
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 3, y: 8}
+        - {x: 3, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 2f15752035c4a16448b78c0058417d52
@@ -251,10 +251,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -3, y: 0}
-        - {x: -3, y: 16}
-        - {x: 0, y: 16}
-        - {x: 0, y: 0}
+      - - {x: -3, y: -8}
+        - {x: -3, y: 8}
+        - {x: 0, y: 8}
+        - {x: 0, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 5a79e46062ea384448d7a06905b68e58
@@ -276,10 +276,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 7}
-        - {x: -16, y: 10}
-        - {x: 16, y: 10}
-        - {x: 16, y: 7}
+      - - {x: -16, y: -1}
+        - {x: -16, y: 2}
+        - {x: 16, y: 2}
+        - {x: 16, y: -1}
       tessellationDetail: 0
       bones: []
       spriteID: 5d30537efb4e5a840a954e67eef2ab28
@@ -299,13 +299,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Iso Tiles Collisions_1: -615672439
       Iso Tiles Collisions_0: 1400779840
-      Iso Tiles Collisions_4: -280719032
-      Iso Tiles Collisions_3: 1987819658
-      Iso Tiles Collisions_6: 2103252688
+      Iso Tiles Collisions_1: -615672439
       Iso Tiles Collisions_2: 299621863
+      Iso Tiles Collisions_3: 1987819658
+      Iso Tiles Collisions_4: -280719032
       Iso Tiles Collisions_5: 1446521411
+      Iso Tiles Collisions_6: 2103252688
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
