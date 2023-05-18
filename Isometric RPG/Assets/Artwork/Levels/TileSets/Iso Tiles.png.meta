@@ -159,90 +159,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iso Tiles_38
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 815db7a75459f424e9aa18a7ae1c4eea
-      internalID: -1990219279
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Iso Tiles_39
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b21894da043e433498a951a228d41eee
-      internalID: 976890016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Iso Tiles_40
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2886d9e8a799d7247864d5c0fba17674
-      internalID: 1161510276
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Iso Tiles_41
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e27bfefcbe949cf4680f553e69799708
-      internalID: 1155828997
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Iso Tiles_14
       rect:
         serializedVersion: 2
@@ -423,48 +339,48 @@ TextureImporter:
     - texture: {instanceID: 0}
       name: _NormalMap
     nameFileIdTable:
-      Iso Tiles_11: 761820948
-      Iso Tiles_18: 403046772
-      Iso Tiles_16: -154722346
-      Iso Tiles_29: 1169486824
-      Iso Tiles_9: 183135312
-      Iso Tiles_31: 1895354120
-      Iso Tiles_21: 1013324380
-      Iso Tiles_23: 235837376
-      Iso Tiles_15: -890304440
-      Iso Tiles_17: 1167827972
-      Iso Tiles_27: -642398945
       Iso Tiles_0: -910734753
-      Iso Tiles_8: 1857899175
-      Iso Tiles_28: -1214068504
-      Iso Tiles_12: 1526567963
-      Iso Tiles_19: -1310074195
-      Iso Tiles_36: -2004061256
-      Iso Tiles_2: -409031650
-      Iso Tiles_10: -1672225643
-      Iso Tiles_37: 900948769
       Iso Tiles_1: 1780534401
-      Iso Tiles_40: 1161510276
-      Iso Tiles_7: -143626782
-      Iso Tiles_34: -28173920
-      Iso Tiles_5: -1894286148
-      Iso Tiles_33: -531417000
-      Iso Tiles_32: 1858960374
-      Iso Tiles_41: 1155828997
-      Iso Tiles_20: -173851713
+      Iso Tiles_10: -1672225643
+      Iso Tiles_11: 761820948
+      Iso Tiles_12: 1526567963
       Iso Tiles_13: 246005831
-      Iso Tiles_22: 611969574
-      Iso Tiles_38: -1990219279
-      Iso Tiles_26: -581627729
       Iso Tiles_14: -202506944
-      Iso Tiles_35: 76852230
+      Iso Tiles_15: -890304440
+      Iso Tiles_16: -154722346
+      Iso Tiles_17: 1167827972
+      Iso Tiles_18: 403046772
+      Iso Tiles_19: -1310074195
+      Iso Tiles_2: -409031650
+      Iso Tiles_20: -173851713
+      Iso Tiles_21: 1013324380
+      Iso Tiles_22: 611969574
+      Iso Tiles_23: 235837376
       Iso Tiles_24: 662538970
-      Iso Tiles_4: 774581503
-      Iso Tiles_6: 654630156
       Iso Tiles_25: -1191742800
-      Iso Tiles_30: -899016351
+      Iso Tiles_26: -581627729
+      Iso Tiles_27: -642398945
+      Iso Tiles_28: -1214068504
+      Iso Tiles_29: 1169486824
       Iso Tiles_3: -1933863800
+      Iso Tiles_30: -899016351
+      Iso Tiles_31: 1895354120
+      Iso Tiles_32: 1858960374
+      Iso Tiles_33: -531417000
+      Iso Tiles_34: -28173920
+      Iso Tiles_35: 76852230
+      Iso Tiles_36: -2004061256
+      Iso Tiles_37: 900948769
+      Iso Tiles_38: -1990219279
       Iso Tiles_39: 976890016
+      Iso Tiles_4: 774581503
+      Iso Tiles_40: 1161510276
+      Iso Tiles_41: 1155828997
+      Iso Tiles_5: -1894286148
+      Iso Tiles_6: 654630156
+      Iso Tiles_7: -143626782
+      Iso Tiles_8: 1857899175
+      Iso Tiles_9: 183135312
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
