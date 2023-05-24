@@ -180,14 +180,14 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: 4, y: -45}
-        - {x: -3, y: -45}
-        - {x: -4, y: -44}
-        - {x: -4, y: -41}
+        - {x: -2, y: -45}
+        - {x: -3, y: -44}
+        - {x: -3, y: -41}
         - {x: 0, y: -40}
         - {x: 5, y: -40}
-        - {x: 9, y: -41}
-        - {x: 9, y: -43}
-        - {x: 8, y: -44}
+        - {x: 8, y: -41}
+        - {x: 8, y: -43}
+        - {x: 7, y: -44}
       tessellationDetail: 0
       bones: []
       spriteID: 7ed2f064c7487cb408b3970a7b518a71
@@ -208,7 +208,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -2, y: -32}
+        - {x: -16, y: -25}
+        - {x: -16, y: -23}
+        - {x: -2, y: -16}
+        - {x: 2, y: -16}
+        - {x: 16, y: -23}
+        - {x: 16, y: -25}
+        - {x: 2, y: -32}
       tessellationDetail: 0
       bones: []
       spriteID: 72aea9cd66f66bb41be4ca9d7cb33eac
@@ -906,6 +914,27 @@ TextureImporter:
       bones: []
       spriteID: 39b91e8ea6b6c964b849505d23326787
       internalID: -531417000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iso Tiles_34
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 384
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e3c45a057e0c74b8a51fc7ae22d122
+      internalID: -28173920
       vertices: []
       indices: 
       edges: []
