@@ -54,8 +54,10 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
+  m_SerializedViewNames:
+  - UnityEditor.DeviceSimulation.SimulatorWindow
+  m_SerializedViewValues:
+  - C:\Users\cctee\OneDrive\Documents\git\UnityGame\Isometric RPG\Library\PlayModeViewStates\9315751dabe1b9f40a34496696484e7e
   m_PlayModeViewName: GameView
   m_ShowGizmos: 0
   m_TargetDisplay: 0
@@ -84,8 +86,8 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMin: 1
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
+    m_HSlider: 1
+    m_VSlider: 1
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -98,18 +100,18 @@ MonoBehaviour:
       y: 21
       width: 647
       height: 236
-    m_Scale: {x: 2, y: 2}
-    m_Translation: {x: 323.5, y: 118}
+    m_Scale: {x: 3, y: 3}
+    m_Translation: {x: 338.21423, y: 177}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -161.75
+      x: -112.738075
       y: -59
-      width: 323.5
-      height: 118
+      width: 215.66667
+      height: 78.666664
     m_MinimalGUI: 1
   m_defaultScale: 2
   m_LastWindowPixelSize: {x: 1294, y: 514}
@@ -226,8 +228,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 140afeff
-      m_LastClickedID: -128492
+      m_SelectedIDs: 805f0000
+      m_LastClickedID: 0
       m_ExpandedIDs: aefaffff9e610000c8610000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -552,7 +554,7 @@ MonoBehaviour:
       layout: 4
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
-  m_Gizmos: 1
+  m_Gizmos: 0
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
@@ -561,9 +563,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.280802, y: -4.1063647, z: 2.5414689}
+    m_Target: {x: -2.2224984, y: -3.9809227, z: 4.0570707}
     speed: 2
-    m_Value: {x: -2.280802, y: -4.1063647, z: 2.5414689}
+    m_Value: {x: -2.2224984, y: -3.9809227, z: 4.0570707}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -614,9 +616,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 0.4854154
+    m_Target: 0.6923786
     speed: 2
-    m_Value: 0.4854154
+    m_Value: 0.6923786
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -672,8 +674,8 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_ShowAlpha: 0
   m_MipLevel: 0
-  m_Zoom: 1.292309
-  m_ScrollPosition: {x: -206.1995, y: -228.48978}
+  m_Zoom: 0.7705616
+  m_ScrollPosition: {x: -93.429115, y: -59.18569}
   m_SelectedObject: {fileID: 2800000, guid: 32364c1cf58b11640951ff727e5872c3, type: 3}
   m_SelectedSpriteRectGUID: f5e3c45a057e0c74b8a51fc7ae22d122
   m_LastUsedModuleTypeName: UnityEditor.U2D.Sprites.SpriteFrameModule
@@ -701,7 +703,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 39046
+  controlID: 42430
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -786,7 +788,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: a2650000
     m_LastClickedID: 26018
-    m_ExpandedIDs: 000000008a6300006c6500009c650000a265000000ca9a3b
+    m_ExpandedIDs: 000000008a6300006c6500009c65000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -839,9 +841,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 140afeff
-    m_LastClickedInstanceID: -128492
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 805f0000
+    m_LastClickedInstanceID: 24448
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000905f0000805f000078630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1023,7 +1025,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 216
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
