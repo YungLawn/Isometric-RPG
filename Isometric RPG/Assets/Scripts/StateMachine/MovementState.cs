@@ -124,8 +124,14 @@ public abstract class MovementState : State
         return output;
     }
 
-    // void getAnimation()
-    // {
-    //     currentAnimation = BASE + action + translateDirection(state.direction);
-    // }
+    public override void UpdateState()
+    {
+        // Debug.Log("Walking");
+        move();
+    }
+
+    public override void FixedUpdateState()
+    {
+        Animate();
+    }
 }

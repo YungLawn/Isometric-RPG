@@ -13,22 +13,34 @@ public class StateManager : MonoBehaviour
     public Rigidbody2D body;
     public Animator animator;
 
+    private new Collider2D collider;
+    [SerializeField]
+    private ContactFilter2D filter;
+    private List<Collider2D> collidedObjects = new List<Collider2D>(1);
+
     private PlayerInput playerInput;
     private InputAction directionalInput;
     private InputAction sprint;
-    private InputAction dontsprint;
+    private InputAction dontSprint;
+    private InputAction interact;
+    private InputAction dontInteract;
 
     public Vector2 direction;
     public bool runToggle;
+    public bool interactionToggle;
+
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
         directionalInput = playerInput.actions["Move"];
         sprint = playerInput.actions["Sprint"];
-        dontsprint = playerInput.actions["dontSprint"];
+        dontSprint = playerInput.actions["dontSprint"];
+        interact = playerInput.actions["Interact"];
+        dontInteract = playerInput.actions["dontInteract"];
     }
 
     void Start()
@@ -40,7 +52,9 @@ public class StateManager : MonoBehaviour
     void Update()
     {
         getDirectionalInput();
+        checkCollisions();
         isRunning();
+        isInteracting();
         currentState.UpdateState();
     }
 
@@ -64,7 +78,23 @@ public class StateManager : MonoBehaviour
     {   
         if(sprint.triggered)
             runToggle = true;
-        else if(dontsprint.triggered)
+        else if(dontSprint.triggered)
             runToggle = false;
+    }
+    public void isInteracting()
+    {   
+        if(interact.triggered)
+            interactionToggle = true;
+        else if(dontInteract.triggered)
+            interactionToggle = false;
+    }
+
+    public void checkCollisions() {
+        collider.OverlapCollider(filter, collidedObjects);
+        if(interactionToggle) {
+            foreach(var o in collidedObjects) {
+                Debug.Log(body.position.x + " , " + body.position.y);
+            }
+        }
     }
 }

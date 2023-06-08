@@ -13,17 +13,6 @@ public class IdleState : MovementState
         anim = state.animator;
     }
 
-    public override void UpdateState()
-    {
-        // Debug.Log("Idling");
-        move();
-    }
-
-    public override void FixedUpdateState()
-    {
-        Animate();
-    }
-
     public override void OnCollisionEnter(StateManager state)
     {
 
