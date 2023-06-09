@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: water
+    uniqueID: 47958473
+    locked: 0
   - name: rear
     uniqueID: 2551931799
     locked: 0

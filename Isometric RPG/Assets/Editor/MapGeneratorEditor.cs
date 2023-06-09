@@ -10,15 +10,21 @@ public class MapGeneratorEditor : Editor {
 
 		if (DrawDefaultInspector ()) {
 			if (mapGen.autoUpdate) {
+				mapGen.clearTiles();
 				mapGen.GenerateMap ();
 			}
 		}
 
-		if (GUILayout.Button ("Generate")) {
+		if (GUILayout.Button ("Generate Map")) {
+			mapGen.clearTiles();
 			mapGen.GenerateMap ();
 		}
-		if (GUILayout.Button ("Save")) {
+
+		if (GUILayout.Button ("Save Map")) {
 			mapGen.SaveAssetMap ();
+		}
+		if (GUILayout.Button ("Clear Map")) {
+			mapGen.clearTiles();
 		}
 	}
 }

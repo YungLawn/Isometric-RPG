@@ -21,26 +21,29 @@ public class MapGenerator : MonoBehaviour {
 	public Tilemap terrainMap;
 	public Tile waterTile;
 	public Tile grassTile;
-	public Tile sandTile;
+	public IsometricRuleTile sandTile;
 	public bool autoUpdate;
 	[HideInInspector]
 
 	public void GenerateMap() {
-		// float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale);
+		float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
-		float[,] noiseMap = Noise1.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
+		for (int y = -10; y < mapHeight + 10; y++) {
+			for (int x = -10; x < mapWidth + 10; x++) {
+				
+				terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
 
+			}
+		}
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
+			
 				if(noiseMap[x,y] > 0.4 ) {
-					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0),grassTile);
+					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), grassTile);
 				}
 				else if (noiseMap[x,y] < 0.4 && noiseMap[x,y] > 0.3 ) {
-					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0),sandTile);
-				}
-				else if (noiseMap[x,y] < 0.3 ) {
-					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0),waterTile);
+					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), sandTile);
 				}
 			}
 		}
@@ -63,6 +66,10 @@ public class MapGenerator : MonoBehaviour {
             }
         }
     }
+
+	public void clearTiles() {
+		terrainMap.ClearAllTiles();
+	}
 
 	void OnValidate() {
 		if (mapWidth < 1) {
