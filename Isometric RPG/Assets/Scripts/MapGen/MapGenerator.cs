@@ -19,26 +19,48 @@ public class MapGenerator : MonoBehaviour {
 	public Vector2 offset;
 
 	public Tilemap terrainMap;
-	public Tile waterTile;
-	public Tile grassTile;
-	public IsometricRuleTile sandTile;
+	public IsometricRuleTile waterTile;
+	public IsometricRuleTile grassTile;
+	public Tile sandTile;
 	public bool autoUpdate;
-	[HideInInspector]
+
+
+	public int mapRadius; // Radius of the circular map
+	Vector2 center;
 
 	public void GenerateMap() {
+		mapRadius = (mapWidth + mapHeight) / 2;
+		center = new Vector2(0,0);
 		float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
-		for (int y = -10; y < mapHeight + 10; y++) {
-			for (int x = -10; x < mapWidth + 10; x++) {
-				
-				terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+		for (int y = -mapRadius; y <= mapRadius; y++) {
+			for (int x = -mapRadius; x <= mapRadius; x++) {
+				Vector2 position = new Vector2(x, y) + center;
 
+				// Check if the current position is within the circular map
+				if (Vector2.Distance(position, center) <= mapRadius){
+
+					terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), waterTile);
+
+
+					// if(noiseMap[x,y] > 0.4 ) {
+					// 	terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), grassTile);
+					// }
+					// else if (noiseMap[x,y] < 0.4 && noiseMap[x,y] > 0.3 ) {
+					// 	terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), sandTile);
+					// }
+				}
 			}
 		}
 
+
+
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
-			
+
+				// terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+
+
 				if(noiseMap[x,y] > 0.4 ) {
 					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), grassTile);
 				}
@@ -85,5 +107,5 @@ public class MapGenerator : MonoBehaviour {
 			octaves = 0;
 		}
 	}
-	
+
 }
