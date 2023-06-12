@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class Noise {
+public static class CircularNoise {
 
 	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset) {
 		float[,] noiseMap = new float[mapWidth,mapHeight];
@@ -27,7 +27,7 @@ public static class Noise {
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
-		
+
 				float amplitude = 1;
 				float frequency = 1;
 				float noiseHeight = 0;
