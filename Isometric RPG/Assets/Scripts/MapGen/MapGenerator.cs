@@ -25,13 +25,14 @@ public class MapGenerator : MonoBehaviour {
 	public bool autoUpdate;
 
 
-	public int mapRadius; // Radius of the circular map
+	int mapRadius; // Radius of the circular map
 	Vector2 center;
 
 	public void GenerateMap() {
 		mapRadius = (mapWidth + mapHeight) / 2;
 		center = new Vector2(0,0);
 		float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
+
 
 		for (int y = -mapRadius; y <= mapRadius; y++) {
 			for (int x = -mapRadius; x <= mapRadius; x++) {
@@ -40,13 +41,13 @@ public class MapGenerator : MonoBehaviour {
 				// Check if the current position is within the circular map
 				if (Vector2.Distance(position, center) <= mapRadius){
 
-					terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), waterTile);
+					// terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), waterTile);
 
 
-					// if(noiseMap[x,y] > 0.4 ) {
+					// if(noiseMap[(int)position.x, (int)position.y] > 0.4 ) {
 					// 	terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), grassTile);
 					// }
-					// else if (noiseMap[x,y] < 0.4 && noiseMap[x,y] > 0.3 ) {
+					// else if (noiseMap[(int)position.x, (int)position.y] < 0.4 && noiseMap[(int)position.x, (int)position.y] > 0.3 ) {
 					// 	terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), sandTile);
 					// }
 				}
@@ -58,7 +59,7 @@ public class MapGenerator : MonoBehaviour {
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 
-				// terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+				terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
 
 
 				if(noiseMap[x,y] > 0.4 ) {
