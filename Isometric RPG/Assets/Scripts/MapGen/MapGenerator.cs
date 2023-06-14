@@ -60,7 +60,7 @@ public class MapGenerator : MonoBehaviour {
 			for (int x = 0; x < mapWidth; x++) {
 
 
-				terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+				// terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
 
 
 				if(noiseMap[x,y] > 0.4 ) {
@@ -70,6 +70,10 @@ public class MapGenerator : MonoBehaviour {
 				else if (noiseMap[x,y] < 0.4 && noiseMap[x,y] > 0.3 ) {
 					// Debug.Log("sand");
 					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), sandTile);
+				}
+				else if (noiseMap[x,y] < 0.3) {
+					// Debug.Log("sand");
+					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
 				}
 			}
 		}
