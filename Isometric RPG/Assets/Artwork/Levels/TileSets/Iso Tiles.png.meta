@@ -249,27 +249,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iso Tiles_4
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 384
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8b92effe6121794d83e43cec65271c6
-      internalID: 774581503
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Iso Tiles_5
       rect:
         serializedVersion: 2

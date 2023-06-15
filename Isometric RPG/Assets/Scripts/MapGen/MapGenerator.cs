@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Tilemaps;
 using UnityEditor;
+using System.Collections.Generic;
 
 
 public class MapGenerator : MonoBehaviour {
@@ -30,52 +31,45 @@ public class MapGenerator : MonoBehaviour {
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 
-				// terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
 
 				if(noiseMap[x,y] > 0.4 ) {
 					// Debug.Log("grass");
-					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), grassTile);
+					terrainMap.SetTile(position, grassTile);
 				}
 				else if (noiseMap[x,y] < 0.4 && noiseMap[x,y] > 0.3 ) {
 					// Debug.Log("sand");
-					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), sandTile);
+					terrainMap.SetTile(position, sandTile);
 				}
 				else if (noiseMap[x,y] < 0.3) {
 					// Debug.Log("sand");
-					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+					terrainMap.SetTile(position, waterTile);
 				}
 
 			}
 		}
+
+	}
+
+	public void fixWater() {
+
+		bool top = false;
+		bool bottom = false;
+		bool right = false;
+		bool left = false;
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 
-				TileBase centerTile = terrainMap.GetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0));
+				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
 
-				TileBase topTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2), (-y + mapHeight / 2) + 1, 0));
-				TileBase bottomTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2), (-y + mapHeight / 2) - 1, 0));
-				TileBase rightTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2) + 1, (-y + mapHeight / 2), 0));
-				TileBase leftTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2) - 1, (-y + mapHeight / 2), 0));
 
-				if(centerTile.name == "Water") {
-					// Debug.Log("WaterTile @ " +  x + "/" +  y);
+				TileBase centerTile = terrainMap.GetTile(position);
+				Debug.Log(centerTile.name);
 
-					if(topTile != null && topTile.name =="Water") {
-						Debug.Log("above " +  x + "/" +  y);
-					}
-					else if(bottomTile != null && bottomTile.name =="Water") {
-						Debug.Log("below " +  x + "/" +  y);
-					}
-					else if(rightTile != null && rightTile.name =="Water") {
-						Debug.Log("right of " +  x + "/" +  y);
-					}
-					else if(leftTile != null && leftTile.name =="Water") {
-						Debug.Log("left of " +  x + "/" +  y);
-					}
-				}
 			}
 		}
+
 	}
 
 	public void SaveAssetMap() {
