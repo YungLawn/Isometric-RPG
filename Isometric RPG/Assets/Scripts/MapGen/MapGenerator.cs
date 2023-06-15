@@ -19,49 +19,18 @@ public class MapGenerator : MonoBehaviour {
 	public Vector2 offset;
 
 	public Tilemap terrainMap;
-	public IsometricRuleTile waterTile;
-	public IsometricRuleTile grassTile;
-	public Tile sandTile;
+	public TileBase waterTile;
+	public TileBase grassTile;
+	public TileBase sandTile;
 	public bool autoUpdate;
 
-
-	int mapRadius; // Radius of the circular map
-	Vector2 center;
-
 	public void GenerateMap() {
-		mapRadius = (mapWidth + mapHeight) / 2;
-		center = new Vector2(0,0);
 		float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
-
-
-		for (int y = -mapRadius; y <= mapRadius; y++) {
-			for (int x = -mapRadius; x <= mapRadius; x++) {
-				Vector2 position = new Vector2(x, y) + center;
-
-				// Check if the current position is within the circular map
-				if (Vector2.Distance(position, center) <= mapRadius){
-
-					// terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), waterTile);
-
-
-					// if(noiseMap[(int)position.x, (int)position.y] > 0.4 ) {
-					// 	terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), grassTile);
-					// }
-					// else if (noiseMap[(int)position.x, (int)position.y] < 0.4 && noiseMap[(int)position.x, (int)position.y] > 0.3 ) {
-					// 	terrainMap.SetTile(new Vector3Int((int)position.x, (int)position.y, 0), sandTile);
-					// }
-				}
-			}
-		}
-
-
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 
-
 				// terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
-
 
 				if(noiseMap[x,y] > 0.4 ) {
 					// Debug.Log("grass");
@@ -74,6 +43,36 @@ public class MapGenerator : MonoBehaviour {
 				else if (noiseMap[x,y] < 0.3) {
 					// Debug.Log("sand");
 					terrainMap.SetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0), waterTile);
+				}
+
+			}
+		}
+
+		for (int y = 0; y < mapHeight; y++) {
+			for (int x = 0; x < mapWidth; x++) {
+
+				TileBase centerTile = terrainMap.GetTile(new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0));
+
+				TileBase topTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2), (-y + mapHeight / 2) + 1, 0));
+				TileBase bottomTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2), (-y + mapHeight / 2) - 1, 0));
+				TileBase rightTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2) + 1, (-y + mapHeight / 2), 0));
+				TileBase leftTile = terrainMap.GetTile(new Vector3Int((-x + mapWidth / 2) - 1, (-y + mapHeight / 2), 0));
+
+				if(centerTile.name == "Water") {
+					// Debug.Log("WaterTile @ " +  x + "/" +  y);
+
+					if(topTile != null && topTile.name =="Water") {
+						Debug.Log("above " +  x + "/" +  y);
+					}
+					else if(bottomTile != null && bottomTile.name =="Water") {
+						Debug.Log("below " +  x + "/" +  y);
+					}
+					else if(rightTile != null && rightTile.name =="Water") {
+						Debug.Log("right of " +  x + "/" +  y);
+					}
+					else if(leftTile != null && leftTile.name =="Water") {
+						Debug.Log("left of " +  x + "/" +  y);
+					}
 				}
 			}
 		}
