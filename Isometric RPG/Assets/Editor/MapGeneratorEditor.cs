@@ -26,8 +26,8 @@ public class MapGeneratorEditor : Editor {
 		if (GUILayout.Button ("Clear Map")) {
 			mapGen.clearTiles();
 		}
-		if (GUILayout.Button ("Check Water")) {
-			mapGen.fixWater();
+		if (GUILayout.Button ("Clean Up")) {
+			mapGen.cleanUp();
 		}
 	}
 }

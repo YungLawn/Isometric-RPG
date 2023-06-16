@@ -49,30 +49,73 @@ public class MapGenerator : MonoBehaviour {
 			}
 		}
 
+		cleanUp();
+		cleanUp();
+
 	}
 
-	public void fixWater() {
-
-		bool top = false;
-		bool bottom = false;
-		bool right = false;
-		bool left = false;
+	public void cleanUp() {
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 
 				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
-				Vector3Int up = new Vector3Int(-x + mapWidth / 2, (-y + mapHeight / 2) + 1, 0);
-
 
 				// TileBase centerTile = terrainMap.GetTile(position);
 				if(terrainMap.GetTile(position) == waterTile) {
-					Debug.Log(x + " | " + y);
+					int cnt = 0;
+					// Debug.Log(x + " | " + y);
+					if(terrainMap.GetTile(position + new Vector3Int(0,1,0)) != waterTile) {
+						// Debug.Log("up");
+						cnt ++;
+					}
+					if(terrainMap.GetTile(position - new Vector3Int(0,1,0)) != waterTile) {
+						// Debug.Log("down");
+						cnt ++;
+					}
+					if(terrainMap.GetTile(position - new Vector3Int(1,0,0)) != waterTile) {
+						// Debug.Log("left");
+						cnt ++;
+					}
+					if(terrainMap.GetTile(position + new Vector3Int(1,0,0)) != waterTile) {
+						// Debug.Log("right");
+						cnt ++;
+					}
+					
+					if(cnt >= 3) {
+						// Debug.Log("Water" + x + " | " + y);
+						terrainMap.SetTile(position, sandTile);
+					}
+
 				}
 
+				if(terrainMap.GetTile(position) == grassTile) {
+					int cnt = 0;
+					// Debug.Log(x + " | " + y);
+					if(terrainMap.GetTile(position + new Vector3Int(0,1,0)) != grassTile) {
+						// Debug.Log("up");
+						cnt ++;
+					}
+					if(terrainMap.GetTile(position - new Vector3Int(0,1,0)) != grassTile) {
+						// Debug.Log("down");
+						cnt ++;
+					}
+					if(terrainMap.GetTile(position - new Vector3Int(1,0,0)) != grassTile) {
+						// Debug.Log("left");
+						cnt ++;
+					}
+					if(terrainMap.GetTile(position + new Vector3Int(1,0,0)) != grassTile) {
+						// Debug.Log("right");
+						cnt ++;
+					}
+					
+					if(cnt >= 3) {
+						// Debug.Log("Grass" + x + " | " + y);
+						terrainMap.SetTile(position, sandTile);
+					}
+				}
 			}
 		}
-
 	}
 
 	public void SaveAssetMap() {
