@@ -11,6 +11,11 @@ public class MapGenerator : MonoBehaviour {
 	public int mapHeight;
 	public float noiseScale;
 
+	[Range(0,1)]
+	public float grassLimit;
+	[Range(0,1)]
+	public float sandLimit;
+
 	public int octaves;
 	[Range(0,1)]
 	public float persistance;
@@ -24,6 +29,7 @@ public class MapGenerator : MonoBehaviour {
 	public TileBase grassTile;
 	public TileBase sandTile;
 	public bool autoUpdate;
+	public bool Clean;
 
 	public void GenerateMap() {
 		float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
@@ -33,15 +39,15 @@ public class MapGenerator : MonoBehaviour {
 
 				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
 
-				if(noiseMap[x,y] > 0.4 ) {
+				if(noiseMap[x,y] > grassLimit ) {
 					// Debug.Log("grass");
 					terrainMap.SetTile(position, grassTile);
 				}
-				else if (noiseMap[x,y] < 0.4 && noiseMap[x,y] > 0.3 ) {
+				else if (noiseMap[x,y] < grassLimit && noiseMap[x,y] > sandLimit ) {
 					// Debug.Log("sand");
 					terrainMap.SetTile(position, sandTile);
 				}
-				else if (noiseMap[x,y] < 0.3) {
+				else if (noiseMap[x,y] < sandLimit) {
 					// Debug.Log("sand");
 					terrainMap.SetTile(position, waterTile);
 				}
@@ -49,9 +55,11 @@ public class MapGenerator : MonoBehaviour {
 			}
 		}
 
-		cleanUp();
-		cleanUp();
-
+		if(Clean) {
+			cleanUp();
+			cleanUp();
+		}
+		
 	}
 
 	public void cleanUp() {

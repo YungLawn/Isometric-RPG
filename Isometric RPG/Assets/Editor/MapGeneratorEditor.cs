@@ -26,8 +26,5 @@ public class MapGeneratorEditor : Editor {
 		if (GUILayout.Button ("Clear Map")) {
 			mapGen.clearTiles();
 		}
-		if (GUILayout.Button ("Clean Up")) {
-			mapGen.cleanUp();
-		}
 	}
 }
