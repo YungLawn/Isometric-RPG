@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 10.0f;
     public float runMultiplier = 1.5f;
+    [SerializeField]
+    bool diagonal = false;
 
     private Vector2 moveInput;
     private Rigidbody2D body;
@@ -27,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
     float framerate = 0.125f;
     int totalFrames = 8;
     int idleIntervalMultiplier = 1;
+    [SerializeField]
+    [Range (1,5)]
+    int idleIntervalFloor = 3;
+    [Range (1,10)]
+    public int idleIntervalCeiling = 7;
     int currentFrame;
     int idleCycleFrame;
     float timer;
@@ -56,10 +63,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnMove(InputValue value) {
+
         moveInput = value.Get<Vector2>();
+
 
         if(moveInput.x == 0 && moveInput.y == 0) {
             currentAction = IDLE;
+            diagonal = false;
         }
         else{
             currentAction = WALK;
@@ -95,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(idleCycleFrame == 0)
         {
-            idleIntervalMultiplier = Random.Range(3,7);
+            idleIntervalMultiplier = Random.Range(idleIntervalFloor,idleIntervalCeiling);
         }
 
         float normalizedTime = currentFrame / (float)(totalFrames + 1f);//calculate percentage of animation based on current frame
@@ -112,34 +122,42 @@ public class PlayerMovement : MonoBehaviour
         if(moveInput.x == 0 && moveInput.y > 0) //North
         {
             currentDirection = NORTH;
+            diagonal = false;
         }
         else if(moveInput.x == 0 && moveInput.y < 0) //South
         {
             currentDirection = SOUTH;
+            diagonal = false;
         }
         else if(moveInput.x > 0 && moveInput.y == 0) //East
         {
             currentDirection = EAST;
+            diagonal = false;
         }
         else if(moveInput.x < 0 && moveInput.y == 0) //West
         {
             currentDirection = WEST;
+            diagonal = false;
         }
         else if(moveInput.x > 0 && moveInput.y > 0) //NorthEast
         {
             currentDirection = NORTH + EAST;
+            diagonal = true;
         }
         else if(moveInput.x < 0 && moveInput.y > 0) //NorthWest
         {
             currentDirection = NORTH + WEST;
+            diagonal = true;
         }
         else if(moveInput.x > 0 && moveInput.y < 0) //SouthEast
         {
             currentDirection = SOUTH + EAST;
+            diagonal = true;
         }
         else if(moveInput.x < 0 && moveInput.y < 0) //SouthWest
         {
             currentDirection = SOUTH + WEST;
+            diagonal = true;
         }
     }
 

@@ -15,6 +15,12 @@ public class MapGenerator : MonoBehaviour {
 	public float grassLimit;
 	[Range(0,1)]
 	public float sandLimit;
+	[Range(0,1)]
+	public float vegetationZone;
+	[Range(1,50)]
+	public int treeChance;
+	[Range(1,20)]
+	public int grassChance;
 
 	public int octaves;
 	[Range(0,1)]
@@ -25,9 +31,12 @@ public class MapGenerator : MonoBehaviour {
 	public Vector2 offset;
 
 	public Tilemap terrainMap;
+	public Tilemap obstacleMap;
 	public TileBase waterTile;
 	public TileBase grassTile;
 	public TileBase sandTile;
+	public TileBase tree;
+	public TileBase grass;
 	public bool autoUpdate;
 	public bool Clean;
 
@@ -52,14 +61,39 @@ public class MapGenerator : MonoBehaviour {
 					terrainMap.SetTile(position, waterTile);
 				}
 
+
 			}
 		}
+
+		placeObstacles();
 
 		if(Clean) {
 			cleanUp();
 			cleanUp();
 		}
-		
+
+	}
+
+	void placeObstacles() {
+		for (int y = 1; y < mapHeight - 3; y++) {
+			for (int x = 1; x < mapWidth - 3; x++) {
+
+				int treeValue = Random.Range(0,treeChance);
+				int grassValue = Random.Range(0,grassChance);
+
+				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
+
+				if (noiseMap[x,y] > vegetationZone) {
+					// Debug.Log("tree");
+					if(treeValue == 1){
+						obstacleMap.SetTile(position, tree);
+					}
+					if(grassValue == 1 || grassValue == 2){
+						obstacleMap.SetTile(position, grass);
+					}
+				}
+			}
+		}
 	}
 
 	public void cleanUp() {
@@ -89,7 +123,7 @@ public class MapGenerator : MonoBehaviour {
 						// Debug.Log("right");
 						cnt ++;
 					}
-					
+
 					if(cnt >= 3) {
 						// Debug.Log("Water" + x + " | " + y);
 						terrainMap.SetTile(position, sandTile);
@@ -116,7 +150,7 @@ public class MapGenerator : MonoBehaviour {
 						// Debug.Log("right");
 						cnt ++;
 					}
-					
+
 					if(cnt >= 3) {
 						// Debug.Log("Grass" + x + " | " + y);
 						terrainMap.SetTile(position, sandTile);
@@ -146,6 +180,7 @@ public class MapGenerator : MonoBehaviour {
 
 	public void clearTiles() {
 		terrainMap.ClearAllTiles();
+		obstacleMap.ClearAllTiles();
 	}
 
 	void OnValidate() {
