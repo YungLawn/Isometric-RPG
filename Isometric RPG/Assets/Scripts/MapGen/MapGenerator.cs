@@ -62,10 +62,13 @@ public class MapGenerator : MonoBehaviour {
 			for (int x = 0; x < mapWidth; x++) {
 
 				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
+				Vector3Int up = new Vector3Int(-x + mapWidth / 2, (-y + mapHeight / 2) + 1, 0);
 
 
-				TileBase centerTile = terrainMap.GetTile(position);
-				Debug.Log(centerTile.name);
+				// TileBase centerTile = terrainMap.GetTile(position);
+				if(terrainMap.GetTile(position) == waterTile) {
+					Debug.Log(x + " | " + y);
+				}
 
 			}
 		}
