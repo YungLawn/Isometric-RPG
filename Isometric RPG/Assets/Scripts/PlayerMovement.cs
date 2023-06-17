@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     bool diagonal = false;
 
     private Vector2 moveInput;
+    private Vector2 lookInput;
     private Rigidbody2D body;
     private Animator animator;
 
@@ -55,17 +56,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
+
+        Vector2 diagonalFix = diagonal ? new Vector2(1f,0.5f) : new Vector2(1f,1f);
+        float diagonalSpeedFix = diagonal ? 1.5f : 1f;
+        // Vector2 diagonalFix = new Vector2(1f,1f);
+
+
         if(isRunning)
-            body.velocity = moveInput * (moveSpeed * runMultiplier) * Time.fixedDeltaTime;
+            body.velocity = (moveInput * diagonalFix) * ((moveSpeed * diagonalSpeedFix) * runMultiplier) * Time.fixedDeltaTime;
         else
-            body.velocity = moveInput * moveSpeed * Time.fixedDeltaTime;
+            body.velocity = (moveInput * diagonalFix) * (moveSpeed * diagonalSpeedFix) * Time.fixedDeltaTime;
+
+        // Debug.Log(body.velocity);
 
     }
 
     void OnMove(InputValue value) {
 
         moveInput = value.Get<Vector2>();
-
 
         if(moveInput.x == 0 && moveInput.y == 0) {
             currentAction = IDLE;
@@ -87,6 +95,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnDontSprint(){
         isRunning = false;
+    }
+
+    void OnLook(InputValue value){
+        lookInput = value.Get<Vector2>();
     }
 
     void Animate() {

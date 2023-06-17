@@ -7,8 +7,7 @@ using System.Collections.Generic;
 
 public class MapGenerator : MonoBehaviour {
 
-	public int mapWidth;
-	public int mapHeight;
+	public int mapSize;
 	public float noiseScale;
 
 	[Range(0,1)]
@@ -38,70 +37,100 @@ public class MapGenerator : MonoBehaviour {
 	public TileBase tree;
 	public TileBase grass;
 	public bool autoUpdate;
-	public bool Clean;
+	public bool clean;
+	[Range(1,4)]
+	public int cleanUpIterations;
+	public bool beach;
+	public int beachSize;
 
 	public void GenerateMap() {
-		float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
+		float[,] noiseMap = Noise.GenerateNoiseMap (mapSize, mapSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
-		for (int y = 0; y < mapHeight; y++) {
-			for (int x = 0; x < mapWidth; x++) {
+		float centerX = mapSize / 2f; // X-coordinate of the center of the circular area
+		float centerY = mapSize / 2f; // Y-coordinate of the center of the circular area
+		float radius = Mathf.Min(mapSize, mapSize) / 2f; // Radius of the circular area
 
-				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
+		for (int y = -mapSize; y < mapSize * 2; y++) {
+			for (int x = -mapSize; x < mapSize * 2; x++) {
+				float distance = Vector2.Distance(new Vector2(x, y), new Vector2(centerX, centerY));
+				Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
-				if(noiseMap[x,y] > grassLimit ) {
-					// Debug.Log("grass");
-					terrainMap.SetTile(position, grassTile);
-				}
-				else if (noiseMap[x,y] < grassLimit && noiseMap[x,y] > sandLimit ) {
-					// Debug.Log("sand");
-					terrainMap.SetTile(position, sandTile);
-				}
-				else if (noiseMap[x,y] < sandLimit) {
-					// Debug.Log("sand");
+				if (distance <= radius + beachSize + 20) {
 					terrainMap.SetTile(position, waterTile);
 				}
 
-
+				if(beach) {
+					if (distance <= radius + beachSize) {
+						terrainMap.SetTile(position, sandTile);
+					}
+				}
 			}
 		}
 
-		placeObstacles();
+		for (int y = 0; y < mapSize; y++) {
+			for (int x = 0; x < mapSize; x++) {
+				float distance = Vector2.Distance(new Vector2(x, y), new Vector2(centerX, centerY));
+				Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
-		if(Clean) {
-			cleanUp();
-			cleanUp();
+				if (distance <= radius) {
+					// Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
+
+					if (noiseMap[x, y] > grassLimit) {
+						terrainMap.SetTile(position, grassTile);
+					} else if (noiseMap[x, y] < grassLimit && noiseMap[x, y] > sandLimit) {
+						terrainMap.SetTile(position, sandTile);
+					} else if (noiseMap[x, y] < sandLimit) {
+						terrainMap.SetTile(position, waterTile);
+					}
+				}
+			}
+		}
+
+		placeObstacles(noiseMap, centerX, centerY, radius);
+
+		if(clean) {
+			for(int i = 0; i < cleanUpIterations; i++) {
+				cleanUp();
+				cleanUp();
+				cleanUp();
+			}
 		}
 
 	}
 
-	void placeObstacles() {
-		for (int y = 1; y < mapHeight - 3; y++) {
-			for (int x = 1; x < mapWidth - 3; x++) {
+	void placeObstacles(float[,] noiseMap, float centerX, float centerY, float radius) {
 
-				int treeValue = Random.Range(0,treeChance);
-				int grassValue = Random.Range(0,grassChance);
+		for (int y = 0; y < mapSize; y++) {
+			for (int x = 0; x < mapSize; x++) {
+				float distance = Vector2.Distance(new Vector2(x, y), new Vector2(centerX, centerY));
 
-				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
+				if (distance <= radius * 0.95f) {
+					Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
-				if (noiseMap[x,y] > vegetationZone) {
-					// Debug.Log("tree");
-					if(treeValue == 1){
-						obstacleMap.SetTile(position, tree);
-					}
-					if(grassValue == 1 || grassValue == 2){
-						obstacleMap.SetTile(position, grass);
+					int treeValue = Random.Range(0,treeChance);
+					int grassValue = Random.Range(0,grassChance);
+
+					if (noiseMap[x,y] > vegetationZone) {
+						// Debug.Log("tree");
+						if(treeValue == 1){
+							obstacleMap.SetTile(position, tree);
+						}
+						if(grassValue == 1 || grassValue == 2){
+							obstacleMap.SetTile(position, grass);
+						}
 					}
 				}
 			}
 		}
+
 	}
 
 	public void cleanUp() {
 
-		for (int y = 0; y < mapHeight; y++) {
-			for (int x = 0; x < mapWidth; x++) {
+		for (int y = 0; y < mapSize; y++) {
+			for (int x = 0; x < mapSize; x++) {
 
-				Vector3Int position = new Vector3Int(-x + mapWidth / 2, -y + mapHeight / 2, 0);
+				Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
 				// TileBase centerTile = terrainMap.GetTile(position);
 				if(terrainMap.GetTile(position) == waterTile) {
@@ -184,11 +213,11 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void OnValidate() {
-		if (mapWidth < 1) {
-			mapWidth = 1;
+		if (mapSize < 1) {
+			mapSize = 1;
 		}
-		if (mapHeight < 1) {
-			mapHeight = 1;
+		if (mapSize < 1) {
+			mapSize = 1;
 		}
 		if (lacunarity < 1) {
 			lacunarity = 1;
