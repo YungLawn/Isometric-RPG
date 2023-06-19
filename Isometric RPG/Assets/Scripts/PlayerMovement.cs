@@ -41,8 +41,16 @@ public class PlayerMovement : MonoBehaviour
 
     string currentAction = IDLE;
     string currentDirection = SOUTH;
+    string currentLookDirection = SOUTH;
     string currentAnimation = BASE + IDLE + SOUTH;
 
+
+    void OnGUI() {
+        GUIStyle headStyle = new GUIStyle();
+        headStyle.fontSize = 30;
+        GUI.Label(new Rect(0, 0, 500, 50), lookInput.ToString(), headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), body.transform.position.ToString(), headStyle);
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -98,14 +106,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnLook(InputValue value){
-        lookInput = value.Get<Vector2>();
+        lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
     }
 
     void Animate() {
 
         determineDirection();
 
-        currentAnimation = currentAnimation = BASE + currentAction + currentDirection;
+        currentAnimation = BASE + currentAction + currentDirection;
 
         timer += Time.deltaTime;
         if(timer >= framerate)
@@ -171,6 +179,10 @@ public class PlayerMovement : MonoBehaviour
             currentDirection = SOUTH + WEST;
             diagonal = true;
         }
+    }
+
+    void determineLookDirection() {
+
     }
 
 

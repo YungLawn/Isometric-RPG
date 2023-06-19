@@ -37,10 +37,9 @@ public class MapGenerator : MonoBehaviour {
 	public TileBase tree;
 	public TileBase grass;
 	public bool autoUpdate;
-	public bool clean;
-	[Range(1,4)]
+	[Range(0,4)]
 	public int cleanUpIterations;
-	public bool beach;
+	[Range(2,20)]
 	public int beachSize;
 
 	public void GenerateMap() {
@@ -59,11 +58,6 @@ public class MapGenerator : MonoBehaviour {
 					terrainMap.SetTile(position, waterTile);
 				}
 
-				if(beach) {
-					if (distance <= radius + beachSize) {
-						terrainMap.SetTile(position, sandTile);
-					}
-				}
 			}
 		}
 
@@ -72,14 +66,20 @@ public class MapGenerator : MonoBehaviour {
 				float distance = Vector2.Distance(new Vector2(x, y), new Vector2(centerX, centerY));
 				Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
+
 				if (distance <= radius) {
+					if (noiseMap[x, y] >= sandLimit)
+						terrainMap.SetTile(position, sandTile);
+				}
+
+				if (distance <= radius - beachSize) {
 					// Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
-					if (noiseMap[x, y] > grassLimit) {
+					if (noiseMap[x, y] >= grassLimit) {
 						terrainMap.SetTile(position, grassTile);
-					} else if (noiseMap[x, y] < grassLimit && noiseMap[x, y] > sandLimit) {
+					} else if (noiseMap[x, y] <= grassLimit && noiseMap[x, y] > sandLimit) {
 						terrainMap.SetTile(position, sandTile);
-					} else if (noiseMap[x, y] < sandLimit) {
+					} else if (noiseMap[x, y] <= sandLimit) {
 						terrainMap.SetTile(position, waterTile);
 					}
 				}
@@ -88,12 +88,8 @@ public class MapGenerator : MonoBehaviour {
 
 		placeObstacles(noiseMap, centerX, centerY, radius);
 
-		if(clean) {
-			for(int i = 0; i < cleanUpIterations; i++) {
-				cleanUp();
-				cleanUp();
-				cleanUp();
-			}
+		for(int i = 0; i < cleanUpIterations; i++) {
+			cleanUp();
 		}
 
 	}
@@ -104,7 +100,7 @@ public class MapGenerator : MonoBehaviour {
 			for (int x = 0; x < mapSize; x++) {
 				float distance = Vector2.Distance(new Vector2(x, y), new Vector2(centerX, centerY));
 
-				if (distance <= radius * 0.95f) {
+				if (distance <= (radius - beachSize) * 0.95f) {
 					Vector3Int position = new Vector3Int(-x + mapSize / 2, -y + mapSize / 2, 0);
 
 					int treeValue = Random.Range(0,treeChance);
