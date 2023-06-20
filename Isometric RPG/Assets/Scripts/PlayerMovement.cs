@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lookInput;
+    // private float lookAngle;
     private Rigidbody2D body;
     private Animator animator;
 
@@ -49,7 +50,9 @@ public class PlayerMovement : MonoBehaviour
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
         GUI.Label(new Rect(0, 0, 500, 50), lookInput.ToString(), headStyle);
-        GUI.Label(new Rect(0, 30, 500, 50), body.transform.position.ToString(), headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), Mathf.Abs(lookInput.y).ToString(), headStyle);
+        GUI.Label(new Rect(0, 60, 500, 50), currentLookDirection, headStyle);
+
     }
 
     // Start is called before the first frame update
@@ -64,19 +67,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
-
-        Vector2 diagonalFix = diagonal ? new Vector2(1f,0.5f) : new Vector2(1f,1f);
-        float diagonalSpeedFix = diagonal ? 1.5f : 1f;
-        // Vector2 diagonalFix = new Vector2(1f,1f);
-
-
-        if(isRunning)
-            body.velocity = (moveInput * diagonalFix) * ((moveSpeed * diagonalSpeedFix) * runMultiplier) * Time.fixedDeltaTime;
-        else
-            body.velocity = (moveInput * diagonalFix) * (moveSpeed * diagonalSpeedFix) * Time.fixedDeltaTime;
-
-        // Debug.Log(body.velocity);
-
+        Move();
     }
 
     void OnMove(InputValue value) {
@@ -106,12 +97,26 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnLook(InputValue value){
-        lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
+        lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
+        // lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
+    }
+
+    void Move(){
+        Vector2 diagonalFix = diagonal ? new Vector2(1f,0.5f) : new Vector2(1f,1f);
+        float diagonalSpeedFix = diagonal ? 1.5f : 1f;
+
+        if(isRunning)
+            body.velocity = (moveInput * diagonalFix) * ((moveSpeed * diagonalSpeedFix) * runMultiplier) * Time.fixedDeltaTime;
+        else
+            body.velocity = (moveInput * diagonalFix) * (moveSpeed * diagonalSpeedFix) * Time.fixedDeltaTime;
+
+        // Debug.Log(body.velocity);
     }
 
     void Animate() {
 
         determineDirection();
+        determineLookDirection();
 
         currentAnimation = BASE + currentAction + currentDirection;
 
@@ -182,7 +187,33 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void determineLookDirection() {
-
+        if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.5){ //North
+            currentLookDirection = WEST;
+        }
+        else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.5){ //South
+            currentLookDirection = EAST;
+        }
+        else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.5){ //East
+            currentLookDirection = NORTH;
+        }
+        else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.5){ //West
+            currentLookDirection = SOUTH;
+        }
+        else if(lookInput.x < 0 && lookInput.y > 0.5){ //NorthWest
+            currentLookDirection = NORTH + WEST;
+        }
+        else if(lookInput.x < 0 && lookInput.y < 0.5){ //SouthWest
+            currentLookDirection = SOUTH + WEST;
+        }
+        else if(lookInput.x > 0 && lookInput.y > 0.5){ //NorthEast
+            currentLookDirection = NORTH + EAST;
+        }
+        else if(lookInput.x > 0 && lookInput.y < 0.5){ //SouthEast
+            currentLookDirection = SOUTH + EAST;
+        }
+        else {
+            currentLookDirection = "--";
+        }
     }
 
 
