@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementSplit : MonoBehaviour
 {
-    public float moveSpeed = 10.0f;
-    public float runMultiplier = 1.5f;
+    public float moveSpeed;
+    public float runMultiplier;
     [SerializeField]
     bool diagonal = false;
 
@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     const string SOUTH = "South";
     const string EAST = "East";
     const string WEST = "West";
+    const string TOP = "Top_";
+    const string BOTTOM = "Bottom_";
 
     [SerializeField]
     bool isRunning;
@@ -43,16 +45,16 @@ public class PlayerMovement : MonoBehaviour
     string currentAction = IDLE;
     string currentDirection = SOUTH;
     string currentLookDirection = SOUTH;
-    string currentAnimation = BASE + IDLE + SOUTH;
+    string currentAnimationTop = BASE + IDLE + TOP + SOUTH;
+    string currentAnimationBottom = BASE + IDLE + BOTTOM + SOUTH;
 
 
     void OnGUI() {
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
-        GUI.Label(new Rect(0, 0, 500, 50), lookInput.ToString(), headStyle);
-        GUI.Label(new Rect(0, 30, 500, 50), Mathf.Abs(lookInput.y).ToString(), headStyle);
-        GUI.Label(new Rect(0, 60, 500, 50), currentLookDirection, headStyle);
-
+        GUI.Label(new Rect(0, 0, 500, 50), currentFrame.ToString(), headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), currentAnimationTop, headStyle);
+        GUI.Label(new Rect(0, 60, 500, 50), currentAnimationBottom, headStyle);
     }
 
     // Start is called before the first frame update
@@ -118,7 +120,8 @@ public class PlayerMovement : MonoBehaviour
         determineDirection();
         determineLookDirection();
 
-        currentAnimation = BASE + currentAction + currentDirection;
+        currentAnimationTop = BASE + currentAction + TOP + currentLookDirection;
+        currentAnimationBottom = BASE + currentAction + BOTTOM + currentDirection;
 
         timer += Time.deltaTime;
         if(timer >= framerate)
@@ -136,10 +139,18 @@ public class PlayerMovement : MonoBehaviour
         float normalizedTime = currentFrame / (float)(totalFrames + 1f);//calculate percentage of animation based on current frame
 
         // if idling, restrict animation for X cycles
-        if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE)
-            animator.PlayInFixedTime(currentAnimation, 0, 0);
-        else    //play animation as normal
-            animator.PlayInFixedTime(currentAnimation, 0, normalizedTime);
+        // if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE) {
+        //     animator.PlayInFixedTime(currentAnimationTop, 0, 0);
+        //     animator.PlayInFixedTime(currentAnimationBottom, 1, 0);
+        // }
+        // //play animation as normal
+        // else {
+        //     animator.PlayInFixedTime(currentAnimationTop, 0, normalizedTime);
+        //     animator.PlayInFixedTime(currentAnimationBottom, 1, normalizedTime);
+        // }
+
+        animator.PlayInFixedTime(currentAnimationTop, 0, normalizedTime);
+        // animator.PlayInFixedTime(currentAnimationBottom, 1, normalizedTime);
 
     }
 
@@ -211,9 +222,7 @@ public class PlayerMovement : MonoBehaviour
         else if(lookInput.x > 0 && lookInput.y < 0.5){ //SouthEast
             currentLookDirection = SOUTH + EAST;
         }
-        else {
-            currentLookDirection = "--";
-        }
+
     }
 
 

@@ -37,7 +37,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_NE
+  m_Name: Human_Idle_Top_NorthEast
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -63,7 +63,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_SW
+  m_Name: Human_Idle_Top_SouthWest
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -89,7 +89,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_E
+  m_Name: Human_Idle_Top_East
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -115,7 +115,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_NW
+  m_Name: Human_Idle_Top_NorthWest
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -141,7 +141,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_SE
+  m_Name: Human_Idle_Bottom_SouthEast
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -167,7 +167,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_N
+  m_Name: Human_Idle_Bottom_North
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -208,7 +208,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_SW
+  m_Name: Human_Idle_Bottom_SouthWest
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -293,7 +293,7 @@ AnimatorController:
     m_Behaviours: []
     m_BlendingMode: 1
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 0
+    m_DefaultWeight: 1
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -304,7 +304,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_NE
+  m_Name: Human_Idle_Bottom_NorthEast
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -345,7 +345,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_SE
+  m_Name: Human_Idle_Top_SouthEast
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -371,7 +371,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_W
+  m_Name: Human_Idle_Bottom_West
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -397,7 +397,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_W
+  m_Name: Human_Idle_Top_West
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -466,7 +466,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_S
+  m_Name: Human_Idle_Bottom_South
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -492,7 +492,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_NW
+  m_Name: Human_Idle_Bottom_NorthWest
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -518,7 +518,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_S
+  m_Name: Human_Idle_Top_South
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -559,7 +559,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Top_N
+  m_Name: Human_Idle_Top_North
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -628,7 +628,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Human_Idle_Bottom_E
+  m_Name: Human_Idle_Bottom_East
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

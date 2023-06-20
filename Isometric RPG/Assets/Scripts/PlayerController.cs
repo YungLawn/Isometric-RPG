@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovementSplit : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 10.0f;
-    public float runMultiplier = 1.5f;
+    public float moveSpeed;
+    public float runMultiplier;
     [SerializeField]
     bool diagonal = false;
 
@@ -49,10 +49,9 @@ public class PlayerMovementSplit : MonoBehaviour
     void OnGUI() {
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
-        GUI.Label(new Rect(0, 0, 500, 50), lookInput.ToString(), headStyle);
-        GUI.Label(new Rect(0, 30, 500, 50), Mathf.Abs(lookInput.y).ToString(), headStyle);
-        GUI.Label(new Rect(0, 60, 500, 50), currentLookDirection, headStyle);
-
+        GUI.Label(new Rect(0, 0, 500, 50), currentFrame.ToString(), headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), currentAnimation, headStyle);
+        GUI.Label(new Rect(0, 60, 500, 50), idleCycleFrame.ToString(), headStyle);
     }
 
     // Start is called before the first frame update
