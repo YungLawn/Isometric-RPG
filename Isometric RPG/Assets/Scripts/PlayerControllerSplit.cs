@@ -14,18 +14,24 @@ public class PlayerMovementSplit : MonoBehaviour
     private Vector2 lookInput;
     // private float lookAngle;
     private Rigidbody2D body;
-    private Animator animator;
+    private SpriteRenderer rendererTop;
+    private SpriteRenderer rendererBottom;
 
-    const string BASE = "Human_";
-    const string WALK = "Walk_";
-    const string IDLE =  "Idle_";
-    const string RUN = "Run_";
-    const string NORTH = "North";
-    const string SOUTH = "South";
-    const string EAST = "East";
-    const string WEST = "West";
-    const string TOP = "Top_";
-    const string BOTTOM = "Bottom_";
+    public Sprite[] idleSpritesTop;
+    public Sprite[] idleSpritesBottom;
+
+
+
+    const string BASE = "IsoHuman";
+    const string WALK = "Walk";
+    const string IDLE =  "Idle";
+    const string RUN = "Run";
+    const string NORTH = "N";
+    const string SOUTH = "S";
+    const string EAST = "E";
+    const string WEST = "W";
+    const string TOP = "Top-";
+    const string BOTTOM = "Bottom-";
 
     [SerializeField]
     bool isRunning;
@@ -45,22 +51,27 @@ public class PlayerMovementSplit : MonoBehaviour
     string currentAction = IDLE;
     string currentDirection = SOUTH;
     string currentLookDirection = SOUTH;
-    string currentAnimationTop = BASE + IDLE + TOP + SOUTH;
-    string currentAnimationBottom = BASE + IDLE + BOTTOM + SOUTH;
+    string currentSpriteTop = BASE + IDLE + TOP + SOUTH;
+    string currentSpriteBottom = BASE + IDLE + BOTTOM + SOUTH;
 
 
     void OnGUI() {
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
         GUI.Label(new Rect(0, 0, 500, 50), currentFrame.ToString(), headStyle);
-        GUI.Label(new Rect(0, 30, 500, 50), currentAnimationTop, headStyle);
-        GUI.Label(new Rect(0, 60, 500, 50), currentAnimationBottom, headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), "Top: " + currentSpriteTop, headStyle);
+        GUI.Label(new Rect(0, 60, 500, 50), "Bottom: " + currentSpriteBottom, headStyle);
     }
 
     // Start is called before the first frame update
     void Start() {
         body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        rendererTop = transform.Find("Top").GetComponent<SpriteRenderer>();
+        rendererBottom = transform.Find("Bottom").GetComponent<SpriteRenderer>();
+        // foreach (Sprite sprite in idleSprites)
+        // {
+        //     Debug.Log(sprite.name);
+        // }
     }
 
     // Update is called once per frame
@@ -120,9 +131,6 @@ public class PlayerMovementSplit : MonoBehaviour
         determineDirection();
         determineLookDirection();
 
-        currentAnimationTop = BASE + currentAction + TOP + currentLookDirection;
-        currentAnimationBottom = BASE + currentAction + BOTTOM + currentDirection;
-
         timer += Time.deltaTime;
         if(timer >= framerate)
         {
@@ -138,20 +146,23 @@ public class PlayerMovementSplit : MonoBehaviour
 
         float normalizedTime = currentFrame / (float)(totalFrames + 1f);//calculate percentage of animation based on current frame
 
-        // if idling, restrict animation for X cycles
-        // if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE) {
-        //     animator.PlayInFixedTime(currentAnimationTop, 0, 0);
-        //     animator.PlayInFixedTime(currentAnimationBottom, 1, 0);
-        // }
-        // //play animation as normal
-        // else {
-        //     animator.PlayInFixedTime(currentAnimationTop, 0, normalizedTime);
-        //     animator.PlayInFixedTime(currentAnimationBottom, 1, normalizedTime);
-        // }
+        currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
+        currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
 
-        animator.PlayInFixedTime(currentAnimationTop, 0, normalizedTime);
-        // animator.PlayInFixedTime(currentAnimationBottom, 1, normalizedTime);
+        foreach (Sprite sprite in idleSpritesTop)
+        {
+            if(sprite.name == currentSpriteTop) {
+                rendererTop.sprite = sprite;
+            }
 
+        }
+        foreach (Sprite sprite in idleSpritesBottom)
+        {
+            if(sprite.name == currentSpriteBottom) {
+                rendererBottom.sprite = sprite;
+            }
+
+        }
     }
 
     void determineDirection() {
