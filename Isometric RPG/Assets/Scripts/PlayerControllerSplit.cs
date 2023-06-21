@@ -19,6 +19,8 @@ public class PlayerMovementSplit : MonoBehaviour
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesBottom;
+    public Sprite[] walkSpritesTop;
+    public Sprite[] walkSpritesBottom;
 
 
 
@@ -54,13 +56,16 @@ public class PlayerMovementSplit : MonoBehaviour
     string currentSpriteTop = BASE + IDLE + TOP + SOUTH;
     string currentSpriteBottom = BASE + IDLE + BOTTOM + SOUTH;
 
+    string logString1;
+    string logString2;
+
 
     void OnGUI() {
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
-        GUI.Label(new Rect(0, 0, 500, 50), currentFrame.ToString(), headStyle);
-        GUI.Label(new Rect(0, 30, 500, 50), "Top: " + currentSpriteTop, headStyle);
-        GUI.Label(new Rect(0, 60, 500, 50), "Bottom: " + currentSpriteBottom, headStyle);
+        GUI.Label(new Rect(0, 0, 500, 50), logString1, headStyle);
+        // GUI.Label(new Rect(0, 30, 500, 50), idleCycleFrame.ToString(), headStyle);
+        // GUI.Label(new Rect(0, 60, 500, 50), idleIntervalMultiplier.ToString(), headStyle);
     }
 
     // Start is called before the first frame update
@@ -68,10 +73,6 @@ public class PlayerMovementSplit : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         rendererTop = transform.Find("Top").GetComponent<SpriteRenderer>();
         rendererBottom = transform.Find("Bottom").GetComponent<SpriteRenderer>();
-        // foreach (Sprite sprite in idleSprites)
-        // {
-        //     Debug.Log(sprite.name);
-        // }
     }
 
     // Update is called once per frame
@@ -102,10 +103,12 @@ public class PlayerMovementSplit : MonoBehaviour
         }
     }
 
-    void OnSprint(){
+    void OnSprint(InputValue value){
+        logString1 = "sprint: " + value.ToString();
         isRunning = true;
     }
-    void OnDontSprint(){
+    void OnDontSprint(InputValue value){
+        logString2 = "dontsprint: " + value.ToString();
         isRunning = false;
     }
 
@@ -118,10 +121,14 @@ public class PlayerMovementSplit : MonoBehaviour
         Vector2 diagonalFix = diagonal ? new Vector2(1f,0.5f) : new Vector2(1f,1f);
         float diagonalSpeedFix = diagonal ? 1.5f : 1f;
 
-        if(isRunning)
+        if(isRunning){
             body.velocity = (moveInput * diagonalFix) * ((moveSpeed * diagonalSpeedFix) * runMultiplier) * Time.fixedDeltaTime;
-        else
+            framerate = 0.0625f;
+        }
+        else {
             body.velocity = (moveInput * diagonalFix) * (moveSpeed * diagonalSpeedFix) * Time.fixedDeltaTime;
+            framerate = 0.125f;
+        }
 
         // Debug.Log(body.velocity);
     }
@@ -144,24 +151,29 @@ public class PlayerMovementSplit : MonoBehaviour
             idleIntervalMultiplier = Random.Range(idleIntervalFloor,idleIntervalCeiling);
         }
 
-        float normalizedTime = currentFrame / (float)(totalFrames + 1f);//calculate percentage of animation based on current frame
-
-        currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
-        currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
-
-        foreach (Sprite sprite in idleSpritesTop)
-        {
-            if(sprite.name == currentSpriteTop) {
-                rendererTop.sprite = sprite;
-            }
-
+        if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){
+            currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + 0;
+            currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + 0;
         }
-        foreach (Sprite sprite in idleSpritesBottom)
-        {
-            if(sprite.name == currentSpriteBottom) {
-                rendererBottom.sprite = sprite;
+        else {
+            currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
+            currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
+        }
+        
+        for(int i = 0;i < idleSpritesTop.Length; i++) {
+            if(idleSpritesTop[i].name == currentSpriteTop){
+                rendererTop.sprite = idleSpritesTop[i];
+            }
+            if(idleSpritesBottom[i].name == currentSpriteBottom){
+                rendererBottom.sprite = idleSpritesBottom[i];
             }
 
+            if(walkSpritesTop[i].name == currentSpriteTop){
+                rendererTop.sprite = walkSpritesTop[i];
+            }
+            if(walkSpritesBottom[i].name == currentSpriteBottom){
+                rendererBottom.sprite = walkSpritesBottom[i];
+            }
         }
     }
 
@@ -176,7 +188,7 @@ public class PlayerMovementSplit : MonoBehaviour
             currentDirection = SOUTH;
             diagonal = false;
         }
-        else if(moveInput.x > 0 && moveInput.y == 0) //East
+        else if((moveInput.x > 0 && moveInput.y == 0)) //East
         {
             currentDirection = EAST;
             diagonal = false;
@@ -209,28 +221,28 @@ public class PlayerMovementSplit : MonoBehaviour
     }
 
     void determineLookDirection() {
-        if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.5){ //North
+        if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.4){ //North
             currentLookDirection = WEST;
         }
-        else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.5){ //South
+        else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.4){ //South
             currentLookDirection = EAST;
         }
-        else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.5){ //East
+        else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.4){ //East
             currentLookDirection = NORTH;
         }
-        else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.5){ //West
+        else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.4){ //West
             currentLookDirection = SOUTH;
         }
-        else if(lookInput.x < 0 && lookInput.y > 0.5){ //NorthWest
+        else if(lookInput.x < 0 && lookInput.y > 0.4){ //NorthWest
             currentLookDirection = NORTH + WEST;
         }
-        else if(lookInput.x < 0 && lookInput.y < 0.5){ //SouthWest
+        else if(lookInput.x < 0 && lookInput.y < 0.4){ //SouthWest
             currentLookDirection = SOUTH + WEST;
         }
-        else if(lookInput.x > 0 && lookInput.y > 0.5){ //NorthEast
+        else if(lookInput.x > 0 && lookInput.y > 0.4){ //NorthEast
             currentLookDirection = NORTH + EAST;
         }
-        else if(lookInput.x > 0 && lookInput.y < 0.5){ //SouthEast
+        else if(lookInput.x > 0 && lookInput.y < 0.4){ //SouthEast
             currentLookDirection = SOUTH + EAST;
         }
 
