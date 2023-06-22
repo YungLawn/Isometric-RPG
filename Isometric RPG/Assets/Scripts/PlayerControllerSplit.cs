@@ -7,8 +7,9 @@ public class PlayerMovementSplit : MonoBehaviour
 {
     public float moveSpeed;
     public float runMultiplier;
-    [SerializeField]
-    bool diagonal = false;
+    bool diagonal;
+    bool isRunning;
+    bool isInteracting;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -22,8 +23,6 @@ public class PlayerMovementSplit : MonoBehaviour
     public Sprite[] walkSpritesTop;
     public Sprite[] walkSpritesBottom;
 
-
-
     const string BASE = "IsoHuman";
     const string WALK = "Walk";
     const string IDLE =  "Idle";
@@ -35,17 +34,14 @@ public class PlayerMovementSplit : MonoBehaviour
     const string TOP = "Top-";
     const string BOTTOM = "Bottom-";
 
-    [SerializeField]
-    bool isRunning;
 
     float framerate = 0.125f;
     int totalFrames = 8;
     int idleIntervalMultiplier = 1;
-    [SerializeField]
-    [Range (1,5)]
+    [SerializeField] [Range (1,5)]
     int idleIntervalFloor = 3;
-    [Range (1,10)]
-    public int idleIntervalCeiling = 7;
+    [SerializeField] [Range (1,10)]
+    int idleIntervalCeiling = 7;
     int currentFrame;
     int idleCycleFrame;
     float timer;
@@ -59,13 +55,14 @@ public class PlayerMovementSplit : MonoBehaviour
     string logString1;
     string logString2;
 
-
     void OnGUI() {
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
-        GUI.Label(new Rect(0, 0, 500, 50), logString1, headStyle);
+        // GUI.Label(new Rect(0, 0, 500, 50), currentFrame.ToString(), headStyle);
         // GUI.Label(new Rect(0, 30, 500, 50), idleCycleFrame.ToString(), headStyle);
         // GUI.Label(new Rect(0, 60, 500, 50), idleIntervalMultiplier.ToString(), headStyle);
+        GUI.Label(new Rect(0, 00, 500, 50), isRunning.ToString(), headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), isInteracting.ToString(), headStyle);
     }
 
     // Start is called before the first frame update
@@ -103,13 +100,12 @@ public class PlayerMovementSplit : MonoBehaviour
         }
     }
 
-    void OnSprint(InputValue value){
-        logString1 = "sprint: " + value.ToString();
-        isRunning = true;
+    void OnSprint() {
+        isRunning = !isRunning;
     }
-    void OnDontSprint(InputValue value){
-        logString2 = "dontsprint: " + value.ToString();
-        isRunning = false;
+
+    void OnInteract() {
+        isInteracting = !isInteracting;
     }
 
     void OnLook(InputValue value){
@@ -135,30 +131,27 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void Animate() {
 
-        determineDirection();
         determineLookDirection();
-
+        determineDirection();
+        
         timer += Time.deltaTime;
-        if(timer >= framerate)
-        {
+        if(timer >= framerate) {
             timer -= framerate;
             currentFrame = (currentFrame + 1) % totalFrames; //cycling through animation frames
             idleCycleFrame = (idleCycleFrame + 1) % (totalFrames * idleIntervalMultiplier); // cycling through idle interval
         }
 
-        if(idleCycleFrame == 0)
-        {
+        if(idleCycleFrame == 0) {
             idleIntervalMultiplier = Random.Range(idleIntervalFloor,idleIntervalCeiling);
         }
 
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){
-            currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + 0;
-            currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + 0;
+            currentFrame = 0;
+            currentDirection = currentLookDirection;
         }
-        else {
-            currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
-            currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
-        }
+        currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
+        currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
+        
         
         for(int i = 0;i < idleSpritesTop.Length; i++) {
             if(idleSpritesTop[i].name == currentSpriteTop){
