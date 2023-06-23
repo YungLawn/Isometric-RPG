@@ -149,7 +149,7 @@ public class PlayerMovementSplit : MonoBehaviour
             currentFrame = 0;
             // currentDirection = currentLookDirection;
         }
-        currentSpriteTop = BASE + currentAction + TOP + currentDirection + "_" + currentFrame;
+        currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
         currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
 
         logString2 = currentDirection;
@@ -203,19 +203,19 @@ public class PlayerMovementSplit : MonoBehaviour
     void handleFlip() {
         if(moveInput.x < 0){
             rendererBottom.flipX = true;
-            rendererTop.flipX = true;
+            // rendererTop.flipX = true;
         }
         else if(moveInput.x > 0) {
             rendererBottom.flipX = false;
-            rendererTop.flipX = false;
+            // rendererTop.flipX = false;
         }
 
-        // if(lookInput.x < 0){
-        //     rendererTop.flipX = true;
-        // }
-        // else if(lookInput.x > 0) {
-        //     rendererTop.flipX = false;
-        // }
+        if(lookInput.x < 0){
+            rendererTop.flipX = true;
+        }
+        else if(lookInput.x > 0) {
+            rendererTop.flipX = false;
+        }
     }
 
     // void determineDirection() {
