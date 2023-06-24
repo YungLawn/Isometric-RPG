@@ -130,10 +130,10 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void Animate() {
 
-        handleFlip();
+        // handleFlip();
         determineLookDirection();
         determineDirection();
-        
+
         timer += Time.deltaTime;
         if(timer >= framerate) {
             timer -= framerate;
@@ -153,8 +153,8 @@ public class PlayerMovementSplit : MonoBehaviour
         currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
 
         logString2 = currentDirection;
-        
-        
+
+
         for(int i = 0;i < idleSpritesTop.Length; i++) {
             if(idleSpritesTop[i].name == currentSpriteTop){
                 rendererTop.sprite = idleSpritesTop[i];
@@ -173,50 +173,51 @@ public class PlayerMovementSplit : MonoBehaviour
     }
 
     void determineDirection() {
+        rendererBottom.flipX = false;
         if(moveInput.y > 0) { //north
-            if(Mathf.Abs(moveInput.x) > 0){
+            if(moveInput.x > 0){
                 currentDirection = NORTH + EAST;
                 diagonal = true;
             }
-            else { 
+            else if(moveInput.x < 0) {
+                currentDirection = NORTH + EAST;
+                rendererBottom.flipX = true;
+                diagonal = true;
+            }
+            else {
                 currentDirection = NORTH;
                 diagonal = false;
             }
         }
         else if (moveInput.y < 0) { //South
-            if(Mathf.Abs(moveInput.x) > 0){
+            if(moveInput.x > 0){
                 currentDirection = SOUTH + EAST;
                 diagonal = true;
             }
-            else { 
+            else if(moveInput.x < 0) {
+                currentDirection = SOUTH + EAST;
+                rendererBottom.flipX = true;
+                diagonal = true;
+            }
+            else {
                 currentDirection = SOUTH;
                 diagonal = false;
             }
         }
         else{
-            if(Mathf.Abs(moveInput.x) > 0)
-            currentDirection = EAST;
-            diagonal = false;
+            if(moveInput.x > 0) {
+                currentDirection = EAST;
+                diagonal = false;
+            }
+            else if(moveInput.x < 0) {
+                currentDirection = EAST;
+                rendererBottom.flipX = true;
+                diagonal = false;
+            }
+
         }
     }
 
-    void handleFlip() {
-        if(moveInput.x < 0){
-            rendererBottom.flipX = true;
-            // rendererTop.flipX = true;
-        }
-        else if(moveInput.x > 0) {
-            rendererBottom.flipX = false;
-            // rendererTop.flipX = false;
-        }
-
-        if(lookInput.x < 0){
-            rendererTop.flipX = true;
-        }
-        else if(lookInput.x > 0) {
-            rendererTop.flipX = false;
-        }
-    }
 
     // void determineDirection() {
     //     if(moveInput.x == 0 && moveInput.y > 0) //North
@@ -261,54 +262,58 @@ public class PlayerMovementSplit : MonoBehaviour
     //     }
     // }
 
-    void determineLookDirection() {
-
-        if(lookInput.y > 0.4) { //north
-            if(Mathf.Abs(lookInput.x) > 0.4){
-                currentLookDirection = NORTH + EAST;
-            }
-            else { 
-                currentLookDirection = NORTH;
-            }
-        }
-        else if (lookInput.y < -0.4) { //South
-            if(Mathf.Abs(lookInput.x) > 0.4){
-                currentLookDirection = SOUTH + EAST;
-            }
-            else { 
-                currentLookDirection = SOUTH;
-            }
-        }
-        else if(Mathf.Abs(lookInput.y) < 0.4) {
-            currentLookDirection = EAST;
-        }
-        
-    }
-
     // void determineLookDirection() {
-    //     if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.4){ //North
-    //         currentLookDirection = WEST;
+    //     rendererTop.flipX = false;
+    //     if(lookInput.y > 0.4) { //north
+    //         if(Mathf.Abs(lookInput.x) > 0.4){
+    //             currentLookDirection = NORTH + EAST;
+    //         }
+    //         else {
+    //             currentLookDirection = NORTH;
+    //         }
     //     }
-    //     else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.4){ //South
+    //     else if (lookInput.y < -0.4) { //South
+    //         if(Mathf.Abs(lookInput.x) > 0.4){
+    //             currentLookDirection = SOUTH + EAST;
+    //         }
+    //         else {
+    //             currentLookDirection = SOUTH;
+    //         }
+    //     }
+    //     else if(Mathf.Abs(lookInput.y) < 0.4) {
     //         currentLookDirection = EAST;
     //     }
-    //     else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.4){ //East
-    //         currentLookDirection = NORTH;
-    //     }
-    //     else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.4){ //West
-    //         currentLookDirection = SOUTH;
-    //     }
-    //     else if(lookInput.x < 0 && lookInput.y > 0.4){ //NorthWest
-    //         currentLookDirection = NORTH + WEST;
-    //     }
-    //     else if(lookInput.x < 0 && lookInput.y < 0.4){ //SouthWest
-    //         currentLookDirection = SOUTH + WEST;
-    //     }
-    //     else if(lookInput.x > 0 && lookInput.y > 0.4){ //NorthEast
-    //         currentLookDirection = NORTH + EAST;
-    //     }
-    //     else if(lookInput.x > 0 && lookInput.y < 0.4){ //SouthEast
-    //         currentLookDirection = SOUTH + EAST;
-    //     }
+
     // }
+
+    void determineLookDirection() {
+        rendererTop.flipX = false;
+        if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.4){ //West
+            currentLookDirection = EAST;
+            rendererTop.flipX = true;
+        }
+        else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.4){ //East
+            currentLookDirection = EAST;
+        }
+        else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.4){ //North
+            currentLookDirection = NORTH;
+        }
+        else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.4){ //South
+            currentLookDirection = SOUTH;
+        }
+        else if(lookInput.x < 0 && lookInput.y > 0.4){ //NorthWest
+            currentLookDirection = NORTH + EAST;
+            rendererTop.flipX = true;
+        }
+        else if(lookInput.x < 0 && lookInput.y < 0.4){ //SouthWest
+            currentLookDirection = SOUTH + EAST;
+            rendererTop.flipX = true;
+        }
+        else if(lookInput.x > 0 && lookInput.y > 0.4){ //NorthEast
+            currentLookDirection = NORTH + EAST;
+        }
+        else if(lookInput.x > 0 && lookInput.y < 0.4){ //SouthEast
+            currentLookDirection = SOUTH + EAST;
+        }
+    }
 }
