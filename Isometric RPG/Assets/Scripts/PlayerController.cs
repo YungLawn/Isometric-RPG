@@ -147,12 +147,11 @@ public class PlayerMovementSplit : MonoBehaviour
 
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){
             currentFrame = 0;
-            // currentDirection = currentLookDirection;
         }
         currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
         currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
 
-        logString2 = currentDirection;
+        // logString2 = currentDirection;
 
 
         for(int i = 0;i < idleSpritesTop.Length; i++) {
@@ -174,47 +173,56 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void determineDirection() {
         rendererBottom.flipX = false;
-        if(moveInput.y > 0) { //north
-            if(moveInput.x > 0){
-                currentDirection = NORTH + EAST;
-                diagonal = true;
-            }
-            else if(moveInput.x < 0) {
-                currentDirection = NORTH + EAST;
-                rendererBottom.flipX = true;
-                diagonal = true;
-            }
-            else {
-                currentDirection = NORTH;
-                diagonal = false;
-            }
-        }
-        else if (moveInput.y < 0) { //South
-            if(moveInput.x > 0){
-                currentDirection = SOUTH + EAST;
-                diagonal = true;
-            }
-            else if(moveInput.x < 0) {
-                currentDirection = SOUTH + EAST;
-                rendererBottom.flipX = true;
-                diagonal = true;
-            }
-            else {
-                currentDirection = SOUTH;
-                diagonal = false;
-            }
-        }
-        else{
-            if(moveInput.x > 0) {
-                currentDirection = EAST;
-                diagonal = false;
-            }
-            else if(moveInput.x < 0) {
-                currentDirection = EAST;
-                rendererBottom.flipX = true;
-                diagonal = false;
-            }
 
+        if(currentAction != IDLE) {
+            if(moveInput.y > 0) { //north
+                if(moveInput.x > 0){
+                    currentDirection = NORTH + EAST;
+                    diagonal = true;
+                }
+                else if(moveInput.x < 0) {
+                    currentDirection = NORTH + EAST;
+                    rendererBottom.flipX = true;
+                    diagonal = true;
+                }
+                else {
+                    currentDirection = NORTH;
+                    diagonal = false;
+                }
+            }
+            else if (moveInput.y < 0) { //South
+                if(moveInput.x > 0){
+                    currentDirection = SOUTH + EAST;
+                    diagonal = true;
+                }
+                else if(moveInput.x < 0) {
+                    currentDirection = SOUTH + EAST;
+                    rendererBottom.flipX = true;
+                    diagonal = true;
+                }
+                else {
+                    currentDirection = SOUTH;
+                    diagonal = false;
+                }
+            }
+            else{
+                if(moveInput.x > 0) {
+                    currentDirection = EAST;
+                    diagonal = false;
+                }
+                else if(moveInput.x < 0) {
+                    currentDirection = EAST;
+                    rendererBottom.flipX = true;
+                    diagonal = false;
+                }
+
+            }
+        }
+        else {
+            currentDirection = currentLookDirection;
+            if(lookInput.x < 0){
+                rendererBottom.flipX = true;
+            }
         }
     }
 
@@ -262,68 +270,66 @@ public class PlayerMovementSplit : MonoBehaviour
     //     }
     // }
 
-    // void determineLookDirection() {
-    //     rendererTop.flipX = false;
-    //     if(lookInput.y > 0.4) { //north
-    //         if(lookInput.x > 0.4){
-    //             currentLookDirection = NORTH + EAST;
-    //         }
-    //         else if(lookInput.x < -0.4){
-    //             currentLookDirection = NORTH + EAST;
-    //             rendererTop.flipX = true;
-    //         }
-    //         else {
-    //             currentLookDirection = NORTH;
-    //         }
-    //     }
-    //     else if (lookInput.y < -0.4) { //South
-    //         if(lookInput.x > 0.4){
-    //             currentLookDirection = SOUTH + EAST;
-    //         }
-    //         else if(lookInput.x < -0.4){
-    //             currentLookDirection = SOUTH + EAST;
-    //             rendererTop.flipX = true;
-    //         }
-    //         else {
-    //             currentLookDirection = SOUTH;
-    //         }
-    //     }
-    //     else {
-    //         if(lookInput.y < 0.4) {
-    //             currentLookDirection = EAST;
-    //         }
-    //         else if(lookInput.y  0.4)
-    //     }
-    // }
-
     void determineLookDirection() {
         rendererTop.flipX = false;
-        if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.4){ //West
+        if(lookInput.y > 0.4) { //north
+            if(Mathf.Abs(lookInput.x) > 0.4){
+                currentLookDirection = NORTH + EAST;
+                if(lookInput.x < -0.4){
+                    rendererTop.flipX = true;
+                }
+            }
+            else {
+                currentLookDirection = NORTH;
+            }
+        }
+        else if (lookInput.y < -0.4) { //South
+            if(Mathf.Abs(lookInput.x) > 0.4){
+                currentLookDirection = SOUTH + EAST;
+                if(lookInput.x < -0.4){
+                 rendererTop.flipX = true;
+                }
+            }
+            else {
+                currentLookDirection = SOUTH;
+            }
+        }
+        else {
             currentLookDirection = EAST;
-            rendererTop.flipX = true;
-        }
-        else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.4){ //East
-            currentLookDirection = EAST;
-        }
-        else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.4){ //North
-            currentLookDirection = NORTH;
-        }
-        else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.4){ //South
-            currentLookDirection = SOUTH;
-        }
-        else if(lookInput.x < 0 && lookInput.y > 0.4){ //NorthWest
-            currentLookDirection = NORTH + EAST;
-            rendererTop.flipX = true;
-        }
-        else if(lookInput.x < 0 && lookInput.y < 0.4){ //SouthWest
-            currentLookDirection = SOUTH + EAST;
-            rendererTop.flipX = true;
-        }
-        else if(lookInput.x > 0 && lookInput.y > 0.4){ //NorthEast
-            currentLookDirection = NORTH + EAST;
-        }
-        else if(lookInput.x > 0 && lookInput.y < 0.4){ //SouthEast
-            currentLookDirection = SOUTH + EAST;
+            if(lookInput.x < 0) {
+                rendererTop.flipX = true;
+            }
         }
     }
+
+    // void determineLookDirection() {
+    //     rendererTop.flipX = false;
+    //     if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.4){ //West
+    //         currentLookDirection = EAST;
+    //         rendererTop.flipX = true;
+    //     }
+    //     else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.4){ //East
+    //         currentLookDirection = EAST;
+    //     }
+    //     else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.4){ //North
+    //         currentLookDirection = NORTH;
+    //     }
+    //     else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.4){ //South
+    //         currentLookDirection = SOUTH;
+    //     }
+    //     else if(lookInput.x < 0 && lookInput.y > 0.4){ //NorthWest
+    //         currentLookDirection = NORTH + EAST;
+    //         rendererTop.flipX = true;
+    //     }
+    //     else if(lookInput.x < 0 && lookInput.y < 0.4){ //SouthWest
+    //         currentLookDirection = SOUTH + EAST;
+    //         rendererTop.flipX = true;
+    //     }
+    //     else if(lookInput.x > 0 && lookInput.y > 0.4){ //NorthEast
+    //         currentLookDirection = NORTH + EAST;
+    //     }
+    //     else if(lookInput.x > 0 && lookInput.y < 0.4){ //SouthEast
+    //         currentLookDirection = SOUTH + EAST;
+    //     }
+    // }
 }

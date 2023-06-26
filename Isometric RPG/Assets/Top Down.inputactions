@@ -49,15 +49,6 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "dontInteract",
-                    "type": "Button",
-                    "id": "80abe29f-1221-4496-832e-220bc7868b2e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -300,17 +291,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9d940ff5-2a4f-476a-bbfa-03196ada5d83",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "dontInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
