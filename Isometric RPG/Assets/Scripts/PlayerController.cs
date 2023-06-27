@@ -187,7 +187,7 @@ public class PlayerMovementSplit : MonoBehaviour
             rendererWeapon.flipY = false;
         }
 
-        if(lookInput.y > turnLimit){
+        if(lookInput.y > -turnLimit){
             rendererWeapon.sortingOrder = 0;
         }
         else{
