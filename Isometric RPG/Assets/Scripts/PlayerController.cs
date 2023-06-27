@@ -10,22 +10,27 @@ public class PlayerMovementSplit : MonoBehaviour
     bool diagonal;
     bool isRunning;
     bool isInteracting;
+    bool weaponDrawn;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
-    // private float lookAngle;
+    private float lookAngle;
     private Rigidbody2D body;
     private SpriteRenderer rendererTop;
     private SpriteRenderer rendererBottom;
+    private Transform Weapon;
+    private SpriteRenderer rendererWeapon;
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesBottom;
     public Sprite[] walkSpritesTop;
     public Sprite[] walkSpritesBottom;
+    public Sprite[] drawnSpritesTop;
 
     const string BASE = "Human";
     const string WALK = "Walk";
     const string IDLE =  "Idle";
+    const string DRAWN = "WeaponDrawn-";
     const string RUN = "Run";
     const string NORTH = "N";
     const string SOUTH = "S";
@@ -33,6 +38,7 @@ public class PlayerMovementSplit : MonoBehaviour
     const string WEST = "W";
     const string TOP = "Top-";
     const string BOTTOM = "Bottom-";
+    public float turnLimit = 0.3f;
 
 
     [SerializeField] float framerate;
@@ -68,6 +74,8 @@ public class PlayerMovementSplit : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         rendererTop = transform.Find("Top").GetComponent<SpriteRenderer>();
         rendererBottom = transform.Find("Bottom").GetComponent<SpriteRenderer>();
+        Weapon = transform.Find("Weapon");
+        rendererWeapon = Weapon.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -86,16 +94,9 @@ public class PlayerMovementSplit : MonoBehaviour
 
         if(moveInput.x == 0 && moveInput.y == 0) {
             currentAction = IDLE;
-            diagonal = false;
         }
         else{
             currentAction = WALK;
-
-            // if(isRunning) {
-            //     currentAction = RUN;
-            // }
-            // else
-            //     currentAction = WALK;
         }
     }
 
@@ -107,10 +108,15 @@ public class PlayerMovementSplit : MonoBehaviour
         isInteracting = !isInteracting;
     }
 
+    void OnDrawWeapon() {
+        weaponDrawn = !weaponDrawn;
+        logString2 = "Drawn: " +weaponDrawn.ToString();
+    }
+
     void OnLook(InputValue value){
         lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
-        logString1 = lookInput.ToString();
-        // lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
+        // logString1 = lookInput.ToString();
+        lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
     }
 
     void Move(){
@@ -123,16 +129,12 @@ public class PlayerMovementSplit : MonoBehaviour
         else {
             body.velocity = (moveInput * diagonalFix) * (moveSpeed * diagonalSpeedFix) * Time.fixedDeltaTime;
         }
-
-
-        // Debug.Log(body.velocity);
     }
 
     void Animate() {
-
-        // handleFlip();
         determineLookDirection();
         determineDirection();
+        handleWeapon();
 
         timer += Time.deltaTime;
         if(timer >= framerate) {
@@ -148,10 +150,10 @@ public class PlayerMovementSplit : MonoBehaviour
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){
             currentFrame = 0;
         }
-        currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
+        currentSpriteTop = BASE + (weaponDrawn ? DRAWN : currentAction + TOP) + currentLookDirection + "_" + currentFrame;
         currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
 
-        // logString2 = currentDirection;
+        logString1 = currentSpriteTop;
 
 
         for(int i = 0;i < idleSpritesTop.Length; i++) {
@@ -168,6 +170,28 @@ public class PlayerMovementSplit : MonoBehaviour
             if(walkSpritesBottom[i].name == currentSpriteBottom){
                 rendererBottom.sprite = walkSpritesBottom[i];
             }
+
+            if(drawnSpritesTop[i].name == currentSpriteTop){
+                rendererTop.sprite = drawnSpritesTop[i];
+            }
+        }
+    }
+
+    void handleWeapon() {
+        rendererWeapon.enabled = weaponDrawn;
+        Weapon.eulerAngles = new Vector3(0,0,lookAngle);
+        if(lookInput.x < 0) {
+             rendererWeapon.flipY = true;
+        }
+        else{
+            rendererWeapon.flipY = false;
+        }
+
+        if(lookInput.y > turnLimit){
+            rendererWeapon.sortingOrder = 0;
+        }
+        else{
+            rendererWeapon.sortingOrder = 1;
         }
     }
 
@@ -176,14 +200,12 @@ public class PlayerMovementSplit : MonoBehaviour
 
         if(currentAction != IDLE) {
             if(moveInput.y > 0) { //north
-                if(moveInput.x > 0){
+                if(Mathf.Abs(moveInput.x) > 0){
                     currentDirection = NORTH + EAST;
                     diagonal = true;
-                }
-                else if(moveInput.x < 0) {
-                    currentDirection = NORTH + EAST;
-                    rendererBottom.flipX = true;
-                    diagonal = true;
+                    if(moveInput.x < 0) {
+                        rendererBottom.flipX = true;
+                    }
                 }
                 else {
                     currentDirection = NORTH;
@@ -191,14 +213,12 @@ public class PlayerMovementSplit : MonoBehaviour
                 }
             }
             else if (moveInput.y < 0) { //South
-                if(moveInput.x > 0){
+                if(Mathf.Abs(moveInput.x) > 0){
                     currentDirection = SOUTH + EAST;
                     diagonal = true;
-                }
-                else if(moveInput.x < 0) {
-                    currentDirection = SOUTH + EAST;
-                    rendererBottom.flipX = true;
-                    diagonal = true;
+                    if(moveInput.x < 0) {
+                        rendererBottom.flipX = true;
+                    }
                 }
                 else {
                     currentDirection = SOUTH;
@@ -226,56 +246,12 @@ public class PlayerMovementSplit : MonoBehaviour
         }
     }
 
-
-    // void determineDirection() {
-    //     if(moveInput.x == 0 && moveInput.y > 0) //North
-    //     {
-    //         currentDirection = NORTH;
-    //         diagonal = false;
-    //     }
-    //     else if(moveInput.x == 0 && moveInput.y < 0) //South
-    //     {
-    //         currentDirection = SOUTH;
-    //         diagonal = false;
-    //     }
-    //     else if((moveInput.x > 0 && moveInput.y == 0)) //East
-    //     {
-    //         currentDirection = EAST;
-    //         diagonal = false;
-    //     }
-    //     else if(moveInput.x < 0 && moveInput.y == 0) //West
-    //     {
-    //         currentDirection = WEST;
-    //         diagonal = false;
-    //     }
-    //     else if(moveInput.x > 0 && moveInput.y > 0) //NorthEast
-    //     {
-    //         currentDirection = NORTH + EAST;
-    //         diagonal = true;
-    //     }
-    //     else if(moveInput.x < 0 && moveInput.y > 0) //NorthWest
-    //     {
-    //         currentDirection = NORTH + WEST;
-    //         diagonal = true;
-    //     }
-    //     else if(moveInput.x > 0 && moveInput.y < 0) //SouthEast
-    //     {
-    //         currentDirection = SOUTH + EAST;
-    //         diagonal = true;
-    //     }
-    //     else if(moveInput.x < 0 && moveInput.y < 0) //SouthWest
-    //     {
-    //         currentDirection = SOUTH + WEST;
-    //         diagonal = true;
-    //     }
-    // }
-
     void determineLookDirection() {
         rendererTop.flipX = false;
-        if(lookInput.y > 0.4) { //north
-            if(Mathf.Abs(lookInput.x) > 0.4){
+        if(lookInput.y > turnLimit) { //north
+            if(Mathf.Abs(lookInput.x) > turnLimit){
                 currentLookDirection = NORTH + EAST;
-                if(lookInput.x < -0.4){
+                if(lookInput.x < -turnLimit){
                     rendererTop.flipX = true;
                 }
             }
@@ -283,10 +259,10 @@ public class PlayerMovementSplit : MonoBehaviour
                 currentLookDirection = NORTH;
             }
         }
-        else if (lookInput.y < -0.4) { //South
-            if(Mathf.Abs(lookInput.x) > 0.4){
+        else if (lookInput.y < -turnLimit) { //South
+            if(Mathf.Abs(lookInput.x) > turnLimit){
                 currentLookDirection = SOUTH + EAST;
-                if(lookInput.x < -0.4){
+                if(lookInput.x < -turnLimit){
                  rendererTop.flipX = true;
                 }
             }
@@ -302,34 +278,4 @@ public class PlayerMovementSplit : MonoBehaviour
         }
     }
 
-    // void determineLookDirection() {
-    //     rendererTop.flipX = false;
-    //     if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.4){ //West
-    //         currentLookDirection = EAST;
-    //         rendererTop.flipX = true;
-    //     }
-    //     else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.4){ //East
-    //         currentLookDirection = EAST;
-    //     }
-    //     else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.4){ //North
-    //         currentLookDirection = NORTH;
-    //     }
-    //     else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.4){ //South
-    //         currentLookDirection = SOUTH;
-    //     }
-    //     else if(lookInput.x < 0 && lookInput.y > 0.4){ //NorthWest
-    //         currentLookDirection = NORTH + EAST;
-    //         rendererTop.flipX = true;
-    //     }
-    //     else if(lookInput.x < 0 && lookInput.y < 0.4){ //SouthWest
-    //         currentLookDirection = SOUTH + EAST;
-    //         rendererTop.flipX = true;
-    //     }
-    //     else if(lookInput.x > 0 && lookInput.y > 0.4){ //NorthEast
-    //         currentLookDirection = NORTH + EAST;
-    //     }
-    //     else if(lookInput.x > 0 && lookInput.y < 0.4){ //SouthEast
-    //         currentLookDirection = SOUTH + EAST;
-    //     }
-    // }
 }
