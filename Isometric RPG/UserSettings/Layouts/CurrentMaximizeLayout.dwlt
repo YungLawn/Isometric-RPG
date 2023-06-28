@@ -92,7 +92,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 10}
   - {fileID: 11}
   m_Selected: 1
-  m_LastSelected: 0
+  m_LastSelected: 3
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -814,10 +814,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 233.5
-    y: 72
-    width: 710
-    height: 378
+    x: 350
+    y: 73
+    width: 1067
+    height: 547
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -852,8 +852,8 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 19bd4798
-    m_LastClickedID: -1740128999
+    m_SelectedIDs: 61799aad
+    m_LastClickedID: -1382385311
     m_ExpandedIDs: 9fa8869f7c24093997c1825a
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -896,8 +896,8 @@ MonoBehaviour:
       \"expectedControlType\": \"Vector2\",\n                    \"processors\":
       \"\",\n                    \"interactions\": \"\",\n                    \"initialStateCheck\":
       true\n                },\n                {\n                    \"name\":
-      \"Look\",\n                    \"type\": \"PassThrough\",\n                   
-      \"id\": \"c9c43e14-d16e-4293-a56f-ef51bef92277\",\n                    \"expectedControlType\":
+      \"Look\",\n                    \"type\": \"Value\",\n                    \"id\":
+      \"c9c43e14-d16e-4293-a56f-ef51bef92277\",\n                    \"expectedControlType\":
       \"Vector2\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
       },\n                {\n                    \"name\": \"Fire\",\n                   

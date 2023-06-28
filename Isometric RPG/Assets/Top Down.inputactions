@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "c9c43e14-d16e-4293-a56f-ef51bef92277",
                     "expectedControlType": "Vector2",
                     "processors": "",

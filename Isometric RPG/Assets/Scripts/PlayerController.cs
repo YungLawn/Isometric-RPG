@@ -34,7 +34,6 @@ public class PlayerMovementSplit : MonoBehaviour
     public Sprite[] drawnSpritesTop;
     public Sprite[] drawnSpritesArms;
 
-
     const string BASE = "Human";
     const string WALK = "Walk";
     const string IDLE =  "Idle";
@@ -48,7 +47,6 @@ public class PlayerMovementSplit : MonoBehaviour
     const string LEGS = "Legs-";
     const string ARMS = "Arms-";
     public float turnLimit = 0.3f;
-
 
     [SerializeField] float framerate;
     int totalFrames = 6;
@@ -130,7 +128,7 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void OnLook(InputValue value){
         lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
-        logString1 = lookInput.ToString();
+        // logString1 = lookInput.ToString();
         lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
     }
 
@@ -202,7 +200,7 @@ public class PlayerMovementSplit : MonoBehaviour
     }
 
     void handleCrosshair() {
-        Crosshair.position = new Vector3(lookInput.x, lookInput.y + 0.21f, 0);
+        Crosshair.position = new Vector3(lookInput.x, lookInput.y, 0);
     }
 
     void handleWeapon() {
