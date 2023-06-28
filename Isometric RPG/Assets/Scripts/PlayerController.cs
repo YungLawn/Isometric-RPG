@@ -21,6 +21,7 @@ public class PlayerMovementSplit : MonoBehaviour
     private SpriteRenderer rendererArms;
     private Transform Weapon;
     private SpriteRenderer rendererWeapon;
+    private Transform Crosshair;
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesLegs;
@@ -85,11 +86,15 @@ public class PlayerMovementSplit : MonoBehaviour
         rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
         Weapon = transform.Find("Weapon");
+        Crosshair = transform.Find("Crosshair");
         rendererWeapon = Weapon.GetComponent<SpriteRenderer>();
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update() {
+        handleCrosshair();
         Animate();
     }
 
@@ -194,6 +199,10 @@ public class PlayerMovementSplit : MonoBehaviour
                 rendererArms.sprite = drawnSpritesArms[i];
             }
         }
+    }
+
+    void handleCrosshair() {
+        Crosshair.position = new Vector3(lookInput.x, lookInput.y + 0.21f, 0);
     }
 
     void handleWeapon() {
