@@ -125,7 +125,7 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void OnLook(InputValue value){
         lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
-        // logString1 = lookInput.ToString();
+        logString1 = lookInput.ToString();
         lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
     }
 
@@ -164,7 +164,7 @@ public class PlayerMovementSplit : MonoBehaviour
         currentSpriteArms = BASE + (weaponDrawn ? DRAWN : currentAction) + ARMS + currentLookDirection + "_" + currentFrame;
         currentSpriteLegs = BASE + currentAction + LEGS + currentDirection + "_" + currentFrame;
 
-        logString1 = currentSpriteArms;
+        // logString1 = currentSpriteArms;
 
         for(int i = 0;i < idleSpritesTop.Length; i++) {
             if(idleSpritesTop[i].name == currentSpriteTop){
@@ -206,7 +206,7 @@ public class PlayerMovementSplit : MonoBehaviour
             rendererWeapon.flipY = false;
         }
 
-        if(lookInput.y > turnLimit){
+        if(lookInput.y > 0){
             rendererWeapon.sortingOrder = 0;
         }
         else {
