@@ -17,27 +17,35 @@ public class PlayerMovementSplit : MonoBehaviour
     private float lookAngle;
     private Rigidbody2D body;
     private SpriteRenderer rendererTop;
-    private SpriteRenderer rendererBottom;
+    private SpriteRenderer rendererLegs;
+    private SpriteRenderer rendererArms;
     private Transform Weapon;
     private SpriteRenderer rendererWeapon;
 
     public Sprite[] idleSpritesTop;
-    public Sprite[] idleSpritesBottom;
+    public Sprite[] idleSpritesLegs;
+    public Sprite[] idleSpritesArms;
+
     public Sprite[] walkSpritesTop;
-    public Sprite[] walkSpritesBottom;
+    public Sprite[] walkSpritesLegs;
+    public Sprite[] walkSpritesArms;
+
     public Sprite[] drawnSpritesTop;
+    public Sprite[] drawnSpritesArms;
+
 
     const string BASE = "Human";
     const string WALK = "Walk";
     const string IDLE =  "Idle";
-    const string DRAWN = "WeaponDrawn-";
+    const string DRAWN = "WeaponDrawn";
     const string RUN = "Run";
     const string NORTH = "N";
     const string SOUTH = "S";
     const string EAST = "E";
     const string WEST = "W";
     const string TOP = "Top-";
-    const string BOTTOM = "Bottom-";
+    const string LEGS = "Legs-";
+    const string ARMS = "Arms-";
     public float turnLimit = 0.3f;
 
 
@@ -54,7 +62,8 @@ public class PlayerMovementSplit : MonoBehaviour
     string currentDirection = SOUTH;
     string currentLookDirection = SOUTH;
     string currentSpriteTop = BASE + IDLE + TOP + SOUTH;
-    string currentSpriteBottom = BASE + IDLE + BOTTOM + SOUTH;
+    string currentSpriteLegs = BASE + IDLE + LEGS + SOUTH;
+    string currentSpriteArms = BASE + IDLE + ARMS + SOUTH;
 
     string logString1 = "--";
     string logString2 = "--";
@@ -73,7 +82,8 @@ public class PlayerMovementSplit : MonoBehaviour
     void Start() {
         body = GetComponent<Rigidbody2D>();
         rendererTop = transform.Find("Top").GetComponent<SpriteRenderer>();
-        rendererBottom = transform.Find("Bottom").GetComponent<SpriteRenderer>();
+        rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
+        rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
         Weapon = transform.Find("Weapon");
         rendererWeapon = Weapon.GetComponent<SpriteRenderer>();
     }
@@ -150,29 +160,38 @@ public class PlayerMovementSplit : MonoBehaviour
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){
             currentFrame = 0;
         }
-        currentSpriteTop = BASE + (weaponDrawn ? DRAWN : currentAction + TOP) + currentLookDirection + "_" + currentFrame;
-        currentSpriteBottom = BASE + currentAction + BOTTOM + currentDirection + "_" + currentFrame;
+        currentSpriteTop = BASE + currentAction + TOP + currentLookDirection + "_" + currentFrame;
+        currentSpriteArms = BASE + (weaponDrawn ? DRAWN : currentAction) + ARMS + currentLookDirection + "_" + currentFrame;
+        currentSpriteLegs = BASE + currentAction + LEGS + currentDirection + "_" + currentFrame;
 
-        logString1 = currentSpriteTop;
-
+        logString1 = currentSpriteArms;
 
         for(int i = 0;i < idleSpritesTop.Length; i++) {
             if(idleSpritesTop[i].name == currentSpriteTop){
                 rendererTop.sprite = idleSpritesTop[i];
             }
-            if(idleSpritesBottom[i].name == currentSpriteBottom){
-                rendererBottom.sprite = idleSpritesBottom[i];
+            if(idleSpritesLegs[i].name == currentSpriteLegs){
+                rendererLegs.sprite = idleSpritesLegs[i];
+            }
+            if(idleSpritesArms[i].name == currentSpriteArms){
+                rendererArms.sprite = idleSpritesArms[i];
             }
 
             if(walkSpritesTop[i].name == currentSpriteTop){
                 rendererTop.sprite = walkSpritesTop[i];
             }
-            if(walkSpritesBottom[i].name == currentSpriteBottom){
-                rendererBottom.sprite = walkSpritesBottom[i];
+            if(walkSpritesLegs[i].name == currentSpriteLegs){
+                rendererLegs.sprite = walkSpritesLegs[i];
+            }
+            if(walkSpritesArms[i].name == currentSpriteArms){
+                rendererArms.sprite = walkSpritesArms[i];
             }
 
             if(drawnSpritesTop[i].name == currentSpriteTop){
                 rendererTop.sprite = drawnSpritesTop[i];
+            }
+            if(drawnSpritesArms[i].name == currentSpriteArms){
+                rendererArms.sprite = drawnSpritesArms[i];
             }
         }
     }
@@ -187,16 +206,16 @@ public class PlayerMovementSplit : MonoBehaviour
             rendererWeapon.flipY = false;
         }
 
-        if(lookInput.y > -turnLimit){
+        if(lookInput.y > turnLimit){
             rendererWeapon.sortingOrder = 0;
         }
-        else{
+        else {
             rendererWeapon.sortingOrder = 1;
         }
     }
 
     void determineDirection() {
-        rendererBottom.flipX = false;
+        rendererLegs.flipX = false;
 
         if(currentAction != IDLE) {
             if(moveInput.y > 0) { //north
@@ -204,7 +223,7 @@ public class PlayerMovementSplit : MonoBehaviour
                     currentDirection = NORTH + EAST;
                     diagonal = true;
                     if(moveInput.x < 0) {
-                        rendererBottom.flipX = true;
+                        rendererLegs.flipX = true;
                     }
                 }
                 else {
@@ -217,7 +236,7 @@ public class PlayerMovementSplit : MonoBehaviour
                     currentDirection = SOUTH + EAST;
                     diagonal = true;
                     if(moveInput.x < 0) {
-                        rendererBottom.flipX = true;
+                        rendererLegs.flipX = true;
                     }
                 }
                 else {
@@ -232,7 +251,7 @@ public class PlayerMovementSplit : MonoBehaviour
                 }
                 else if(moveInput.x < 0) {
                     currentDirection = EAST;
-                    rendererBottom.flipX = true;
+                    rendererLegs.flipX = true;
                     diagonal = false;
                 }
 
@@ -241,18 +260,20 @@ public class PlayerMovementSplit : MonoBehaviour
         else {
             currentDirection = currentLookDirection;
             if(lookInput.x < 0){
-                rendererBottom.flipX = true;
+                rendererLegs.flipX = true;
             }
         }
     }
 
     void determineLookDirection() {
         rendererTop.flipX = false;
+        rendererArms.flipX = false;
         if(lookInput.y > turnLimit) { //north
             if(Mathf.Abs(lookInput.x) > turnLimit){
                 currentLookDirection = NORTH + EAST;
                 if(lookInput.x < -turnLimit){
                     rendererTop.flipX = true;
+                    rendererArms.flipX = true;
                 }
             }
             else {
@@ -264,6 +285,7 @@ public class PlayerMovementSplit : MonoBehaviour
                 currentLookDirection = SOUTH + EAST;
                 if(lookInput.x < -turnLimit){
                  rendererTop.flipX = true;
+                 rendererArms.flipX = true;
                 }
             }
             else {
@@ -274,6 +296,7 @@ public class PlayerMovementSplit : MonoBehaviour
             currentLookDirection = EAST;
             if(lookInput.x < 0) {
                 rendererTop.flipX = true;
+                rendererArms.flipX = true;
             }
         }
     }
