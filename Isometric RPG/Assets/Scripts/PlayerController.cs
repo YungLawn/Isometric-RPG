@@ -14,6 +14,7 @@ public class PlayerMovementSplit : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lookInput;
+    private Vector2 lookInputNormalized;
     private float lookAngle;
     private Rigidbody2D body;
     private SpriteRenderer rendererTop;
@@ -21,7 +22,6 @@ public class PlayerMovementSplit : MonoBehaviour
     private SpriteRenderer rendererArms;
     private Transform Weapon;
     private SpriteRenderer rendererWeapon;
-    private Transform Crosshair;
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesLegs;
@@ -84,7 +84,6 @@ public class PlayerMovementSplit : MonoBehaviour
         rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
         Weapon = transform.Find("Weapon");
-        Crosshair = transform.Find("Crosshair");
         rendererWeapon = Weapon.GetComponent<SpriteRenderer>();
 
         Cursor.visible = false;
@@ -92,7 +91,6 @@ public class PlayerMovementSplit : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        handleCrosshair();
         Animate();
     }
 
@@ -128,6 +126,7 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void OnLook(InputValue value){
         lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
+        lookInputNormalized = lookInput.normalized;
         // logString1 = lookInput.ToString();
         lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
     }
@@ -197,10 +196,6 @@ public class PlayerMovementSplit : MonoBehaviour
                 rendererArms.sprite = drawnSpritesArms[i];
             }
         }
-    }
-
-    void handleCrosshair() {
-        Crosshair.position = new Vector3(lookInput.x, lookInput.y, 0);
     }
 
     void handleWeapon() {
@@ -275,10 +270,10 @@ public class PlayerMovementSplit : MonoBehaviour
     void determineLookDirection() {
         rendererTop.flipX = false;
         rendererArms.flipX = false;
-        if(lookInput.y > turnLimit) { //north
-            if(Mathf.Abs(lookInput.x) > turnLimit){
+        if(lookInputNormalized.y > turnLimit) { //north
+            if(Mathf.Abs(lookInputNormalized.x) > turnLimit){
                 currentLookDirection = NORTH + EAST;
-                if(lookInput.x < -turnLimit){
+                if(lookInputNormalized.x < -turnLimit){
                     rendererTop.flipX = true;
                     rendererArms.flipX = true;
                 }
@@ -287,10 +282,10 @@ public class PlayerMovementSplit : MonoBehaviour
                 currentLookDirection = NORTH;
             }
         }
-        else if (lookInput.y < -turnLimit) { //South
-            if(Mathf.Abs(lookInput.x) > turnLimit){
+        else if (lookInputNormalized.y < -turnLimit) { //South
+            if(Mathf.Abs(lookInputNormalized.x) > turnLimit){
                 currentLookDirection = SOUTH + EAST;
-                if(lookInput.x < -turnLimit){
+                if(lookInputNormalized.x < -turnLimit){
                  rendererTop.flipX = true;
                  rendererArms.flipX = true;
                 }
@@ -301,7 +296,7 @@ public class PlayerMovementSplit : MonoBehaviour
         }
         else {
             currentLookDirection = EAST;
-            if(lookInput.x < 0) {
+            if(lookInputNormalized.x < 0) {
                 rendererTop.flipX = true;
                 rendererArms.flipX = true;
             }

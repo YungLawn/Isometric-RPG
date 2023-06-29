@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     string currentAction = IDLE;
     string currentDirection = SOUTH;
-    string currentLookDirection = SOUTH;
+    // string currentLookDirection = SOUTH;
     string currentAnimation = BASE + IDLE + SOUTH;
 
 
@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     void Animate() {
 
         determineDirection();
-        determineLookDirection();
+        // determineLookDirection();
 
         currentAnimation = BASE + currentAction + currentDirection;
 
@@ -185,35 +185,35 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void determineLookDirection() {
-        if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.5){ //North
-            currentLookDirection = WEST;
-        }
-        else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.5){ //South
-            currentLookDirection = EAST;
-        }
-        else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.5){ //East
-            currentLookDirection = NORTH;
-        }
-        else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.5){ //West
-            currentLookDirection = SOUTH;
-        }
-        else if(lookInput.x < 0 && lookInput.y > 0.5){ //NorthWest
-            currentLookDirection = NORTH + WEST;
-        }
-        else if(lookInput.x < 0 && lookInput.y < 0.5){ //SouthWest
-            currentLookDirection = SOUTH + WEST;
-        }
-        else if(lookInput.x > 0 && lookInput.y > 0.5){ //NorthEast
-            currentLookDirection = NORTH + EAST;
-        }
-        else if(lookInput.x > 0 && lookInput.y < 0.5){ //SouthEast
-            currentLookDirection = SOUTH + EAST;
-        }
-        else {
-            currentLookDirection = "--";
-        }
-    }
+    // void determineLookDirection() {
+    //     if(lookInput.x < 0 && Mathf.Abs(lookInput.y) < 0.5){ //North
+    //         currentLookDirection = WEST;
+    //     }
+    //     else if(lookInput.x > 0 && Mathf.Abs(lookInput.y) < 0.5){ //South
+    //         currentLookDirection = EAST;
+    //     }
+    //     else if(lookInput.y > 0 && Mathf.Abs(lookInput.x) < 0.5){ //East
+    //         currentLookDirection = NORTH;
+    //     }
+    //     else if(lookInput.y < 0 && Mathf.Abs(lookInput.x) < 0.5){ //West
+    //         currentLookDirection = SOUTH;
+    //     }
+    //     else if(lookInput.x < 0 && lookInput.y > 0.5){ //NorthWest
+    //         currentLookDirection = NORTH + WEST;
+    //     }
+    //     else if(lookInput.x < 0 && lookInput.y < 0.5){ //SouthWest
+    //         currentLookDirection = SOUTH + WEST;
+    //     }
+    //     else if(lookInput.x > 0 && lookInput.y > 0.5){ //NorthEast
+    //         currentLookDirection = NORTH + EAST;
+    //     }
+    //     else if(lookInput.x > 0 && lookInput.y < 0.5){ //SouthEast
+    //         currentLookDirection = SOUTH + EAST;
+    //     }
+    //     else {
+    //         currentLookDirection = "--";
+    //     }
+    // }
 
 
 }
