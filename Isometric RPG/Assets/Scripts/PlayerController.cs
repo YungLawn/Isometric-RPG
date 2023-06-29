@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovementSplit : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public float runMultiplier;
     bool diagonal;
     bool isRunning;
     bool isInteracting;
-    bool weaponDrawn;
+    public bool weaponDrawn;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -85,8 +85,6 @@ public class PlayerMovementSplit : MonoBehaviour
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
         Weapon = transform.Find("Weapon");
         rendererWeapon = Weapon.GetComponent<SpriteRenderer>();
-
-        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -121,7 +119,7 @@ public class PlayerMovementSplit : MonoBehaviour
 
     void OnDrawWeapon() {
         weaponDrawn = !weaponDrawn;
-        logString2 = "Drawn: " +weaponDrawn.ToString();
+        // logString2 = "Drawn: " +weaponDrawn.ToString();
     }
 
     void OnLook(InputValue value){
