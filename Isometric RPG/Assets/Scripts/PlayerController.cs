@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer rendererTop;
     private SpriteRenderer rendererLegs;
     private SpriteRenderer rendererArms;
+
+    [SerializeField] private Transform bullet;
+    public Transform Crosshair;
     private Transform Weapon;
     private SpriteRenderer rendererWeapon;
 
@@ -122,6 +125,13 @@ public class PlayerController : MonoBehaviour
         // logString2 = "Drawn: " +weaponDrawn.ToString();
     }
 
+    void OnFire() {
+        if(weaponDrawn) {
+            Debug.Log("!!");
+            handleShootProjectile();
+        }
+    }
+
     void OnLook(InputValue value){
         lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
         lookInputNormalized = lookInput.normalized;
@@ -212,6 +222,14 @@ public class PlayerController : MonoBehaviour
         else {
             rendererWeapon.sortingOrder = 1;
         }
+    }
+
+    void handleShootProjectile() {
+        Transform bulletTransform = Instantiate(bullet, Weapon.transform.position, Quaternion.identity);
+
+        Vector3 shootDirection = (Crosshair.transform.position - Weapon.transform.position).normalized;
+
+        bulletTransform.GetComponent<bullet>().Shoot(shootDirection);
     }
 
     void determineDirection() {
