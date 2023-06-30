@@ -113,7 +113,7 @@ TextureImporter:
       name: bullet
       rect:
         serializedVersion: 2
-        x: 2
+        x: 3
         y: 29
         width: 2
         height: 1
@@ -130,6 +130,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: muzzleFlash
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 23
+        width: 4
+        height: 5
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96ea0d9fa373f794dbf365f6f506a40f
+      internalID: 1913983193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -142,6 +163,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       bullet: 1379643426
+      muzzleFlash: 1913983193
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

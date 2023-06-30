@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPF;
     public float bulletForce = 20f;
     public Transform Crosshair;
-    private Transform Weapon;
+    private Transform Gun;
+    public GameObject muzzleFlashPF;
+    Vector3 recoil = new Vector3(-0.02f, 0,0);
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesLegs;
@@ -86,12 +88,13 @@ public class PlayerController : MonoBehaviour
         rendererTop = transform.Find("Top").GetComponent<SpriteRenderer>();
         rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
-        Weapon = transform.Find("Weapon");
+        Gun = transform.Find("Gun");
     }
 
     // Update is called once per frame
     void Update() {
         Animate();
+        logString2 = Time.time.ToString();
     }
 
     void FixedUpdate() {
@@ -152,7 +155,7 @@ public class PlayerController : MonoBehaviour
     void Animate() {
         determineLookDirection();
         determineDirection();
-        handleWeapon();
+        handleGun();
 
         timer += Time.deltaTime;
         if(timer >= framerate) {
@@ -204,28 +207,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void handleWeapon() {
-        Weapon.GetComponent<SpriteRenderer>().enabled = weaponDrawn;
-        Weapon.eulerAngles = new Vector3(0,0,lookAngle);
+    void handleGun() {
+        Gun.GetComponent<SpriteRenderer>().enabled = weaponDrawn;
+        Gun.eulerAngles = new Vector3(0,0,lookAngle);
         if(lookInput.x < 0) {
-             Weapon.GetComponent<SpriteRenderer>().flipY = true;
+             Gun.GetComponent<SpriteRenderer>().flipY = true;
         }
         else{
-            Weapon.GetComponent<SpriteRenderer>().flipY = false;
+            Gun.GetComponent<SpriteRenderer>().flipY = false;
         }
 
         if(lookInput.y > 0){
-            Weapon.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            Gun.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
         else {
-            Weapon.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            Gun.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
     }
 
     void handleShootProjectile() {
-        GameObject bullet = Instantiate(bulletPF, Weapon.position, Weapon.rotation);
+        float shootTime = Time.time;
+        logString1 = shootTime.ToString();
+        if(shootTime - 1f == Time.time) {
+            Gun.position = Gun.position + recoil;
+        }
+        GameObject bullet = Instantiate(bulletPF, Gun.transform.Find("ShootPoint").position, Gun.rotation);
+        GameObject muzzleFlash = Instantiate(muzzleFlashPF, Gun.transform.Find("ShootPoint").position, Gun.rotation);
+        Destroy(muzzleFlash, 0.025f);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(Weapon.right * bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(Gun.transform.Find("ShootPoint").right * bulletForce, ForceMode2D.Impulse);
     }
 
     void determineDirection() {

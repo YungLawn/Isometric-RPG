@@ -25,7 +25,4 @@ public class CustomCrosshair : MonoBehaviour
         Crosshair.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + crosshairOffset;
     }
 
-    // void OnDrawWeapon() {
-    //     weaponDrawn = !weaponDrawn;
-    // }
 }
