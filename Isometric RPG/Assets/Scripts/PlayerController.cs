@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer rendererLegs;
     private SpriteRenderer rendererArms;
 
-    [SerializeField] private Transform bullet;
+    public GameObject bulletPF;
+    public float bulletForce = 20f;
     public Transform Crosshair;
     private Transform Weapon;
-    private SpriteRenderer rendererWeapon;
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesLegs;
@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
         rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
         Weapon = transform.Find("Weapon");
-        rendererWeapon = Weapon.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -127,7 +126,6 @@ public class PlayerController : MonoBehaviour
 
     void OnFire() {
         if(weaponDrawn) {
-            Debug.Log("!!");
             handleShootProjectile();
         }
     }
@@ -207,29 +205,27 @@ public class PlayerController : MonoBehaviour
     }
 
     void handleWeapon() {
-        rendererWeapon.enabled = weaponDrawn;
+        Weapon.GetComponent<SpriteRenderer>().enabled = weaponDrawn;
         Weapon.eulerAngles = new Vector3(0,0,lookAngle);
         if(lookInput.x < 0) {
-             rendererWeapon.flipY = true;
+             Weapon.GetComponent<SpriteRenderer>().flipY = true;
         }
         else{
-            rendererWeapon.flipY = false;
+            Weapon.GetComponent<SpriteRenderer>().flipY = false;
         }
 
         if(lookInput.y > 0){
-            rendererWeapon.sortingOrder = 0;
+            Weapon.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
         else {
-            rendererWeapon.sortingOrder = 1;
+            Weapon.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
     }
 
     void handleShootProjectile() {
-        Transform bulletTransform = Instantiate(bullet, Weapon.transform.position, Quaternion.identity);
-
-        Vector3 shootDirection = (Crosshair.transform.position - Weapon.transform.position).normalized;
-
-        bulletTransform.GetComponent<bullet>().Shoot(shootDirection);
+        GameObject bullet = Instantiate(bulletPF, Weapon.position, Weapon.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(Weapon.right * bulletForce, ForceMode2D.Impulse);
     }
 
     void determineDirection() {

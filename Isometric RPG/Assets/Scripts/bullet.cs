@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    const float speed = 10f;
 
-    private Vector3 direction;
-
-    public void Shoot(Vector3 shootDirection) {
-        direction = shootDirection;
+    void Awake() {
+        Destroy(gameObject, 5f);
     }
-
-    void Update() {
-        transform.position += direction * speed * Time.deltaTime;
+    void OnCollisionEnter2D(Collision2D collision) {
+        // Debug.Log("Hit");
+        Destroy(gameObject);
     }
 }
