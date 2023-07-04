@@ -67,7 +67,7 @@ public class TileAutomata : MonoBehaviour {
             {
                 terrainMap[x, y] = Random.Range(1, 101) < iniChance ? 1 : 0;
                 Debug.Log(x.ToString() + " , " + y.ToString() + " : " + (Random.Range(1, 101) < iniChance ? 1 : 0).ToString());
-                if( (x == width || x == 0) || (y == height || y == 0)) terrainMap[x,y] = 0; 
+                if( (x == width || x == 0) || (y == height || y == 0)) terrainMap[x,y] = 0;
             }
 
         }
@@ -148,7 +148,7 @@ public class TileAutomata : MonoBehaviour {
 
         if (Input.GetMouseButton(2))
         {
-            SaveAssetMap();
+            // SaveAssetMap();
             count++;
         }
 
@@ -162,28 +162,28 @@ public class TileAutomata : MonoBehaviour {
         }
 
 
-    public void SaveAssetMap()
-    {
-        string saveName = "tmapXY_" + count;
-        var mf = GameObject.Find("Grid");
+    // public void SaveAssetMap()
+    // {
+    //     string saveName = "tmapXY_" + count;
+    //     var mf = GameObject.Find("Grid");
 
-        if (mf)
-        {
-            var savePath = "Assets/" + saveName + ".prefab";
-            if (PrefabUtility.CreatePrefab(savePath,mf))
-            {
-                EditorUtility.DisplayDialog("Tilemap saved", "Your Tilemap was saved under" + savePath, "Continue");
-            }
-            else
-            {
-                EditorUtility.DisplayDialog("Tilemap NOT saved", "An ERROR occured while trying to saveTilemap under" + savePath, "Continue");
-            }
-
-
-        }
+    //     if (mf)
+    //     {
+    //         var savePath = "Assets/" + saveName + ".prefab";
+    //         if (PrefabUtility.CreatePrefab(savePath,mf))
+    //         {
+    //             EditorUtility.DisplayDialog("Tilemap saved", "Your Tilemap was saved under" + savePath, "Continue");
+    //         }
+    //         else
+    //         {
+    //             EditorUtility.DisplayDialog("Tilemap NOT saved", "An ERROR occured while trying to saveTilemap under" + savePath, "Continue");
+    //         }
 
 
-    }
+    //     }
+
+
+    // }
 
     public void clearMap(bool complete)
     {
