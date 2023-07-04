@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
     string logString1 = "--";
     string logString2 = "--";
 
+    private SpriteAnimator animator;
+
     void OnGUI() {
         GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
@@ -89,12 +91,13 @@ public class PlayerController : MonoBehaviour
         rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
         Gun = transform.Find("Gun");
+        animator = GetComponent<SpriteAnimator>();
     }
 
     // Update is called once per frame
     void Update() {
-        Animate();
-        logString2 = Time.time.ToString();
+        animator.Animate(weaponDrawn, moveInput, diagonal, lookInput, lookInputNormalized);
+        handleGun();
     }
 
     void FixedUpdate() {
@@ -226,11 +229,6 @@ public class PlayerController : MonoBehaviour
     }
 
     void handleShootProjectile() {
-        float shootTime = Time.time;
-        logString1 = shootTime.ToString();
-        if(shootTime - 1f == Time.time) {
-            Gun.position = Gun.position + recoil;
-        }
         GameObject bullet = Instantiate(bulletPF, Gun.transform.Find("ShootPoint").position, Gun.rotation);
         GameObject muzzleFlash = Instantiate(muzzleFlashPF, Gun.transform.Find("ShootPoint").position, Gun.rotation);
         Destroy(muzzleFlash, 0.025f);
