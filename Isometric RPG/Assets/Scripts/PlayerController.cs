@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInputNormalized;
     private float lookAngle;
     private Rigidbody2D body;
-    private SpriteRenderer rendererTop;
-    private SpriteRenderer rendererLegs;
-    private SpriteRenderer rendererArms;
 
     public GameObject bulletPF;
     public float bulletForce = 20f;

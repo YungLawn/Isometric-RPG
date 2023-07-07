@@ -6,18 +6,13 @@ public class SpriteAnimator : MonoBehaviour
 {
     private bool weaponDrawn;
 
-    private Dictionary<string, Sprite[]> idleSpritesTopDIC = new Dictionary<string, Sprite[]>();
+    private Dictionary<string, Sprite> topSpritesDIC = new Dictionary<string, Sprite>();
+    private Dictionary<string, Sprite> legSpritesDIC = new Dictionary<string, Sprite>();
+    private Dictionary<string, Sprite> armSpritesDIC = new Dictionary<string, Sprite>();
 
-    public Sprite[] idleSpritesTop;
-    public Sprite[] idleSpritesLegs;
-    public Sprite[] idleSpritesArms;
-
-    public Sprite[] walkSpritesTop;
-    public Sprite[] walkSpritesLegs;
-    public Sprite[] walkSpritesArms;
-
-    public Sprite[] drawnSpritesTop;
-    public Sprite[] drawnSpritesArms;
+    public Sprite[] topSprites;
+    public Sprite[] legSprites;
+    public Sprite[] armSprites;
 
     private SpriteRenderer rendererTop;
     private SpriteRenderer rendererLegs;
@@ -53,17 +48,33 @@ public class SpriteAnimator : MonoBehaviour
     int idleCycleFrame;
     float timer;
 
+    string logString1 = "--";
+    string logString2 = "--";
+    string logString3 = "--";
+
+    void OnGUI() {
+        GUIStyle headStyle = new GUIStyle();
+        headStyle.fontSize = 30;
+        GUI.Label(new Rect(300, 00, 500, 50), logString1, headStyle);
+        GUI.Label(new Rect(300, 30, 500, 50), logString2, headStyle);
+        GUI.Label(new Rect(300, 60, 500, 50), logString3, headStyle);
+    }
+
     void Start() {
         rendererTop = transform.Find("Top").GetComponent<SpriteRenderer>();
         rendererLegs = transform.Find("Legs").GetComponent<SpriteRenderer>();
         rendererArms = transform.Find("Arms").GetComponent<SpriteRenderer>();
 
-        idleSpritesTopDIC.Add("idleSpritesTop", idleSpritesTop);
+        foreach(Sprite sprite in topSprites) {
+            topSpritesDIC.Add(sprite.name,sprite);
+        }
+        foreach(Sprite sprite in armSprites) {
+            armSpritesDIC.Add(sprite.name,sprite);
+        }
+        foreach(Sprite sprite in legSprites) {
+            legSpritesDIC.Add(sprite.name,sprite);
+        }
 
-        // Debug.Log(idleSpritesTopDIC["idleSpritesTop"]);
-        // foreach(Sprite sprite in idleSpritesTopDIC["idleSpritesTop"]) {
-        //     Debug.Log(sprite);
-        // }
     }
 
     public void Animate(bool weaponDrawn, Vector2 moveInput, bool diagonal, Vector2 lookInput, Vector2 lookInputNormalized) {
@@ -74,7 +85,6 @@ public class SpriteAnimator : MonoBehaviour
         else{
             currentAction = WALK;
         }
-
 
         determineDirection(moveInput, diagonal, lookInput);
         determineLookDirection(lookInputNormalized);
@@ -97,36 +107,14 @@ public class SpriteAnimator : MonoBehaviour
         currentSpriteArms = BASE + (weaponDrawn ? DRAWN : currentAction) + ARMS + currentLookDirection + "_" + currentFrame;
         currentSpriteLegs = BASE + currentAction + LEGS + currentDirection + "_" + currentFrame;
 
-        // logString1 = currentSpriteArms;
+        logString1 = currentSpriteTop;
+        logString2 = currentSpriteArms;
+        logString3 = currentSpriteLegs;
 
-        for(int i = 0;i < idleSpritesTop.Length; i++) {
-            if(idleSpritesTop[i].name == currentSpriteTop){
-                rendererTop.sprite = idleSpritesTop[i];
-            }
-            if(idleSpritesLegs[i].name == currentSpriteLegs){
-                rendererLegs.sprite = idleSpritesLegs[i];
-            }
-            if(idleSpritesArms[i].name == currentSpriteArms){
-                rendererArms.sprite = idleSpritesArms[i];
-            }
+        rendererTop.sprite = topSpritesDIC[currentSpriteTop];
+        rendererLegs.sprite = legSpritesDIC[currentSpriteLegs];
+        rendererArms.sprite = armSpritesDIC[currentSpriteArms];
 
-            if(walkSpritesTop[i].name == currentSpriteTop){
-                rendererTop.sprite = walkSpritesTop[i];
-            }
-            if(walkSpritesLegs[i].name == currentSpriteLegs){
-                rendererLegs.sprite = walkSpritesLegs[i];
-            }
-            if(walkSpritesArms[i].name == currentSpriteArms){
-                rendererArms.sprite = walkSpritesArms[i];
-            }
-
-            if(drawnSpritesTop[i].name == currentSpriteTop){
-                rendererTop.sprite = drawnSpritesTop[i];
-            }
-            if(drawnSpritesArms[i].name == currentSpriteArms){
-                rendererArms.sprite = drawnSpritesArms[i];
-            }
-        }
     }
 
     void determineDirection(Vector2 moveInput, bool diagonal, Vector2 lookInput) {
