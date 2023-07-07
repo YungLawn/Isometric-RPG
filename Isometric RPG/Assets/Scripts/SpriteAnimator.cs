@@ -6,7 +6,7 @@ public class SpriteAnimator : MonoBehaviour
 {
     private bool weaponDrawn;
 
-    public Dictionary<string, Sprite[]> idleSpritesTopDIC = new Dictionary<string, Sprite[]>();
+    private Dictionary<string, Sprite[]> idleSpritesTopDIC = new Dictionary<string, Sprite[]>();
 
     public Sprite[] idleSpritesTop;
     public Sprite[] idleSpritesLegs;
@@ -61,9 +61,9 @@ public class SpriteAnimator : MonoBehaviour
         idleSpritesTopDIC.Add("idleSpritesTop", idleSpritesTop);
 
         // Debug.Log(idleSpritesTopDIC["idleSpritesTop"]);
-        foreach(Sprite sprite in idleSpritesTopDIC["idleSpritesTop"]) {
-            Debug.Log(sprite);
-        }
+        // foreach(Sprite sprite in idleSpritesTopDIC["idleSpritesTop"]) {
+        //     Debug.Log(sprite);
+        // }
     }
 
     public void Animate(bool weaponDrawn, Vector2 moveInput, bool diagonal, Vector2 lookInput, Vector2 lookInputNormalized) {
@@ -74,6 +74,7 @@ public class SpriteAnimator : MonoBehaviour
         else{
             currentAction = WALK;
         }
+
 
         determineDirection(moveInput, diagonal, lookInput);
         determineLookDirection(lookInputNormalized);

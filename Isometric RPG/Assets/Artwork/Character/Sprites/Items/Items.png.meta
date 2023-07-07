@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: revolver
+      name: Revolver
       rect:
         serializedVersion: 2
         x: 4
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rifle
+      name: HuntingRifle
       rect:
         serializedVersion: 2
         x: 16
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pistol
+      name: Handgun
       rect:
         serializedVersion: 2
         x: 36
@@ -226,10 +226,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       AssaultRifle: 1755975747
+      Handgun: 1515386109
+      HuntingRifle: 1187870372
       MachineGun: 993545218
-      pistol: 1515386109
-      revolver: 429870172
-      rifle: 1187870372
+      Revolver: 429870172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
