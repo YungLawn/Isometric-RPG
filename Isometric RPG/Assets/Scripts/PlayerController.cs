@@ -31,22 +31,19 @@ public class PlayerController : MonoBehaviour
     public GameObject muzzleFlashPF;
     Vector3 recoil = new Vector3(-0.02f, 0,0);
 
+    GUIStyle headStyle = new GUIStyle();
     string logString1 = "--";
     string logString2 = "--";
 
     private SpriteAnimator animator;
 
     void OnGUI() {
-        GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
-        // GUI.Label(new Rect(0, 0, 500, 50), currentFrame.ToString(), headStyle);
-        // GUI.Label(new Rect(0, 30, 500, 50), idleCycleFrame.ToString(), headStyle);
-        // GUI.Label(new Rect(0, 60, 500, 50), idleIntervalMultiplier.ToString(), headStyle);
+        headStyle.normal.textColor = Color.yellow;
         GUI.Label(new Rect(0, 00, 500, 50), logString1, headStyle);
         GUI.Label(new Rect(0, 30, 500, 50), logString2, headStyle);
     }
 
-    // Start is called before the first frame update
     void Start() {
         body = GetComponent<Rigidbody2D>();
         Gun = transform.Find("Gun");
@@ -61,8 +58,6 @@ public class PlayerController : MonoBehaviour
             riflesDic.Add(sprite.name, sprite);
         }
         Gun.GetComponent<SpriteRenderer>().sprite = riflesDic["MachineGun"];
-
-
 
         logString1 = shootPointPistol.position.ToString();
         logString2 = shootPointRifle.position.ToString();
@@ -84,6 +79,13 @@ public class PlayerController : MonoBehaviour
         // logString1  = moveInput.ToString();
     }
 
+    void OnLook(InputValue value){
+        lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
+        lookInputNormalized = lookInput.normalized;
+        // logString1 = lookInput.ToString();
+        lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
+    }
+
     void OnSprint() {
         isRunning = !isRunning;
     }
@@ -101,13 +103,7 @@ public class PlayerController : MonoBehaviour
         if(weaponDrawn) {
             handleShootProjectile();
         }
-    }
-
-    void OnLook(InputValue value){
-        lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
-        lookInputNormalized = lookInput.normalized;
-        // logString1 = lookInput.ToString();
-        lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
+        // else weaponDrawn = !weaponDrawn;
     }
 
     void Move(){

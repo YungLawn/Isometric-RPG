@@ -48,13 +48,14 @@ public class SpriteAnimator : MonoBehaviour
     int idleCycleFrame;
     float timer;
 
+    GUIStyle headStyle = new GUIStyle();
     string logString1 = "--";
     string logString2 = "--";
     string logString3 = "--";
 
     void OnGUI() {
-        GUIStyle headStyle = new GUIStyle();
         headStyle.fontSize = 30;
+        headStyle.normal.textColor = Color.yellow;
         GUI.Label(new Rect(300, 00, 500, 50), logString1, headStyle);
         GUI.Label(new Rect(300, 30, 500, 50), logString2, headStyle);
         GUI.Label(new Rect(300, 60, 500, 50), logString3, headStyle);
@@ -96,9 +97,11 @@ public class SpriteAnimator : MonoBehaviour
             idleCycleFrame = (idleCycleFrame + 1) % (totalFrames * idleIntervalMultiplier); // cycling through idle interval
         }
 
-        if(idleCycleFrame == 0) {
-            idleIntervalMultiplier = Random.Range(idleIntervalFloor,idleIntervalCeiling);
-        }
+        // if(idleCycleFrame == 0) {
+        //     idleIntervalMultiplier = Random.Range(idleIntervalFloor,idleIntervalCeiling);
+        // }
+
+        idleIntervalMultiplier = idleCycleFrame == 0 ? Random.Range(idleIntervalFloor,idleIntervalCeiling) : idleIntervalMultiplier;
 
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){
             currentFrame = 0;
@@ -157,7 +160,6 @@ public class SpriteAnimator : MonoBehaviour
                     rendererLegs.flipX = true;
                     diagonal = false;
                 }
-
             }
         }
         else {
