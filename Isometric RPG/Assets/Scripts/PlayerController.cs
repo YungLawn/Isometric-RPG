@@ -14,59 +14,33 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lookInput;
-    private Vector2 lookInputNormalized;
     private float lookAngle;
     private Rigidbody2D body;
-
-    public GameObject bulletPF;
-    public float bulletForce = 20f;
-    public Transform Crosshair;
-    public Sprite[] Rifles;
-    private Dictionary<string, Sprite> riflesDic = new Dictionary<string, Sprite>();
-    private Transform shootPointRifle;
-    public Sprite[] Pistols;
-    private Dictionary<string, Sprite> pistolsDic = new Dictionary<string, Sprite>();
-    private Transform shootPointPistol;
-    private Transform Gun;
-    public GameObject muzzleFlashPF;
-    Vector3 recoil = new Vector3(-0.02f, 0,0);
 
     GUIStyle headStyle = new GUIStyle();
     string logString1 = "--";
     string logString2 = "--";
 
     private SpriteAnimator animator;
+    private GunController gunController;
 
     void OnGUI() {
         headStyle.fontSize = 30;
         headStyle.normal.textColor = Color.yellow;
-        GUI.Label(new Rect(0, 00, 500, 50), logString1, headStyle);
-        GUI.Label(new Rect(0, 30, 500, 50), logString2, headStyle);
+        GUI.Label(new Rect(0, 0, 500, 50), "--PlayerContoller--", headStyle);
+        GUI.Label(new Rect(0, 30, 500, 50), logString1, headStyle);
+        GUI.Label(new Rect(0, 60, 500, 50), logString2, headStyle);
     }
 
     void Start() {
         body = GetComponent<Rigidbody2D>();
-        Gun = transform.Find("Gun");
-        shootPointPistol = Gun.transform.Find("ShootPointPistol");
-        shootPointRifle = Gun.transform.Find("ShootPointRifle");
         animator = GetComponent<SpriteAnimator>();
-
-        foreach(Sprite sprite in Pistols) {
-            pistolsDic.Add(sprite.name, sprite);
-        }
-        foreach(Sprite sprite in Rifles) {
-            riflesDic.Add(sprite.name, sprite);
-        }
-        Gun.GetComponent<SpriteRenderer>().sprite = riflesDic["MachineGun"];
-
-        logString1 = shootPointPistol.position.ToString();
-        logString2 = shootPointRifle.position.ToString();
+        gunController = transform.Find("Gun").GetComponent<GunController>();
     }
 
-    // Update is called once per frame
     void Update() {
-        animator.Animate(weaponDrawn, moveInput, diagonal, lookInput, lookInputNormalized);
-        handleGun();
+        animator.Animate(weaponDrawn, moveInput, diagonal, lookInput);
+        gunController.handleGun(weaponDrawn, lookAngle, lookInput);
     }
 
     void FixedUpdate() {
@@ -74,15 +48,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnMove(InputValue value) {
-
         moveInput = value.Get<Vector2>();
-        // logString1  = moveInput.ToString();
     }
 
     void OnLook(InputValue value){
         lookInput = Camera.main.ScreenToWorldPoint(value.Get<Vector2>()) - body.transform.position;
-        lookInputNormalized = lookInput.normalized;
-        // logString1 = lookInput.ToString();
         lookAngle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
     }
 
@@ -96,14 +66,12 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawWeapon() {
         weaponDrawn = !weaponDrawn;
-        // logString2 = "Drawn: " +weaponDrawn.ToString();
     }
 
     void OnFire() {
         if(weaponDrawn) {
-            handleShootProjectile();
+            gunController.Shoot();
         }
-        // else weaponDrawn = !weaponDrawn;
     }
 
     void Move(){
@@ -113,21 +81,6 @@ public class PlayerController : MonoBehaviour
         body.velocity = isRunning
             ? (moveInput * diagonalFix) * ((moveSpeed * diagonalSpeedFix) * runMultiplier) * Time.fixedDeltaTime
             : (moveInput * diagonalFix) * (moveSpeed * diagonalSpeedFix) * Time.fixedDeltaTime;
-    }
-
-    void handleGun() {
-        Gun.GetComponent<SpriteRenderer>().enabled = weaponDrawn;
-        Gun.eulerAngles = new Vector3(0,0,lookAngle);
-        Gun.GetComponent<SpriteRenderer>().flipY = lookInput.x < 0 ? true : false;
-        Gun.GetComponent<SpriteRenderer>().sortingOrder = lookInput.y > 0 ? 0 : 1;
-    }
-
-    void handleShootProjectile() {
-        GameObject muzzleFlash = Instantiate(muzzleFlashPF, shootPointRifle.position, Gun.rotation);
-        Destroy(muzzleFlash, 0.05f);
-        GameObject bullet = Instantiate(bulletPF, shootPointRifle.position, Gun.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(shootPointRifle.right * bulletForce, ForceMode2D.Impulse);
     }
 
 }

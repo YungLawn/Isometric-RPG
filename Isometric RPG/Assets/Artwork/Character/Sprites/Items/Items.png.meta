@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Handgun
+      name: HandGun
       rect:
         serializedVersion: 2
         x: 36
@@ -226,7 +226,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       AssaultRifle: 1755975747
-      Handgun: 1515386109
+      HandGun: 1515386109
       HuntingRifle: 1187870372
       MachineGun: 993545218
       Revolver: 429870172

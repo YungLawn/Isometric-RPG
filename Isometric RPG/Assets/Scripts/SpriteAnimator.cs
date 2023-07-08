@@ -56,9 +56,10 @@ public class SpriteAnimator : MonoBehaviour
     void OnGUI() {
         headStyle.fontSize = 30;
         headStyle.normal.textColor = Color.yellow;
-        GUI.Label(new Rect(300, 00, 500, 50), logString1, headStyle);
-        GUI.Label(new Rect(300, 30, 500, 50), logString2, headStyle);
-        GUI.Label(new Rect(300, 60, 500, 50), logString3, headStyle);
+        GUI.Label(new Rect(300, 0, 500, 50), "--SpriteAnimator--", headStyle);
+        GUI.Label(new Rect(300, 30, 500, 50), logString1, headStyle);
+        GUI.Label(new Rect(300, 60, 500, 50), logString2, headStyle);
+        GUI.Label(new Rect(300, 90, 500, 50), logString3, headStyle);
     }
 
     void Start() {
@@ -78,7 +79,7 @@ public class SpriteAnimator : MonoBehaviour
 
     }
 
-    public void Animate(bool weaponDrawn, Vector2 moveInput, bool diagonal, Vector2 lookInput, Vector2 lookInputNormalized) {
+    public void Animate(bool weaponDrawn, Vector2 moveInput, bool diagonal, Vector2 lookInput) {
 
         if(moveInput.x == 0 && moveInput.y == 0) {
             currentAction = IDLE;
@@ -88,7 +89,7 @@ public class SpriteAnimator : MonoBehaviour
         }
 
         determineDirection(moveInput, diagonal, lookInput);
-        determineLookDirection(lookInputNormalized);
+        determineLookDirection(lookInput.normalized);
 
         timer += Time.deltaTime;
         if(timer >= framerate) {
@@ -110,9 +111,9 @@ public class SpriteAnimator : MonoBehaviour
         currentSpriteArms = BASE + (weaponDrawn ? DRAWN : currentAction) + ARMS + currentLookDirection + "_" + currentFrame;
         currentSpriteLegs = BASE + currentAction + LEGS + currentDirection + "_" + currentFrame;
 
-        logString1 = currentSpriteTop;
-        logString2 = currentSpriteArms;
-        logString3 = currentSpriteLegs;
+        // logString1 = currentSpriteTop;
+        // logString2 = currentSpriteArms;
+        // logString3 = currentSpriteLegs;
 
         rendererTop.sprite = topSpritesDIC[currentSpriteTop];
         rendererLegs.sprite = legSpritesDIC[currentSpriteLegs];
