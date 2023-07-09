@@ -17,12 +17,13 @@ public class PlayerController : MonoBehaviour
     private float lookAngle;
     private Rigidbody2D body;
 
+    private SpriteAnimator animator;
+    private GunController gunController;
+    private InventoryManager InventoryManager;
+
     GUIStyle headStyle = new GUIStyle();
     string logString1 = "--";
     string logString2 = "--";
-
-    private SpriteAnimator animator;
-    private GunController gunController;
 
     void OnGUI() {
         headStyle.fontSize = 30;
@@ -35,12 +36,14 @@ public class PlayerController : MonoBehaviour
     void Start() {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<SpriteAnimator>();
-        gunController = transform.Find("Gun").GetComponent<GunController>();
+        if(transform.Find("Inventory").transform.Find("Gun") != null)
+            gunController = transform.Find("Inventory").transform.Find("Gun").GetComponent<GunController>();
+        InventoryManager = transform.Find("Inventory").GetComponent<InventoryManager>();
     }
 
     void Update() {
         animator.Animate(weaponDrawn, moveInput, diagonal, lookInput);
-        gunController.handleGun(weaponDrawn, lookAngle, lookInput);
+        if(gunController != null) gunController.handleGun(weaponDrawn, lookAngle, lookInput);
     }
 
     void FixedUpdate() {
@@ -62,15 +65,21 @@ public class PlayerController : MonoBehaviour
 
     void OnInteract() {
         isInteracting = !isInteracting;
+
+        // foreach(string item in InventoryManager.Inventory)
+        // {
+        //     print(item);
+        // }
     }
 
     void OnDrawWeapon() {
-        weaponDrawn = !weaponDrawn;
+        if(gunController != null)
+            weaponDrawn = !weaponDrawn;
     }
 
     void OnFire() {
         if(weaponDrawn) {
-            gunController.Shoot();
+            if(gunController != null) gunController.Shoot();
         }
     }
 

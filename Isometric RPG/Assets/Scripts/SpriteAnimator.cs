@@ -98,10 +98,6 @@ public class SpriteAnimator : MonoBehaviour
             idleCycleFrame = (idleCycleFrame + 1) % (totalFrames * idleIntervalMultiplier); // cycling through idle interval
         }
 
-        // if(idleCycleFrame == 0) {
-        //     idleIntervalMultiplier = Random.Range(idleIntervalFloor,idleIntervalCeiling);
-        // }
-
         idleIntervalMultiplier = idleCycleFrame == 0 ? Random.Range(idleIntervalFloor,idleIntervalCeiling) : idleIntervalMultiplier;
 
         if(idleCycleFrame < ((totalFrames * idleIntervalMultiplier) - totalFrames) && currentAction == IDLE){

@@ -33,7 +33,7 @@ public class GunController : MonoBehaviour
         foreach(Sprite sprite in Rifles) {
             riflesDic.Add(sprite.name, sprite);
         }
-        Gun.GetComponent<SpriteRenderer>().sprite = pistolsDic["HandGun"];
+        Gun.GetComponent<SpriteRenderer>().sprite = pistolsDic["Revolver"];
     }
 
     public void handleGun(bool weaponDrawn, float lookAngle, Vector2 lookInput) {
