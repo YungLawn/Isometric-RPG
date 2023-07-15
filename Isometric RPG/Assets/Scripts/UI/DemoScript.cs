@@ -15,4 +15,22 @@ public class DemoScript : MonoBehaviour
         else
             Debug.Log("not added");
     }
+
+    public void GetSelectedItem() {
+        Item receivedItem = inventoryManager.GetSelectedItem(false);
+        if(receivedItem != null) {
+            Debug.Log("Received: " + receivedItem);
+        } else {
+            Debug.Log("No Item Received");
+        }
+    }
+
+    public void UseSelectedItem() {
+        Item receivedItem = inventoryManager.GetSelectedItem(true);
+        if(receivedItem != null) {
+            Debug.Log("Used: " + receivedItem);
+        } else {
+            Debug.Log("No Item Used");
+        }
+    }
 }
